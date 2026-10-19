@@ -1,0 +1,569 @@
+<title>Krilly</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Figtree:wght@400;600;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: one centered column that "descends" — the page background darkens with your depth. */
+:root {
+  --sea-0: #0b6e8a;      /* sunlight zone */
+  --sea-1: #073b5c;      /* twilight */
+  --sea-2: #04182e;      /* midnight / abyss */
+  --ink: #e9f6f7;
+  --ink-dim: #93b6c2;
+  --krill: #ff7a5c;      /* krill coral: the one accent */
+  --krill-soft: rgba(255,122,92,.16);
+  --glass: rgba(255,255,255,.07);
+  --glass-line: rgba(255,255,255,.14);
+  --good: #5ee6b0;
+  --bad: #ff5c7a;
+  --font-display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --depth: 0;             /* 0..1, set by JS */
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body {
+  background: var(--sea-2);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  overflow-x: hidden;
+}
+#ocean {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(180deg,
+    color-mix(in oklab, var(--sea-0) calc((1 - var(--depth)) * 100%), var(--sea-2)) 0%,
+    color-mix(in oklab, var(--sea-1) calc((1 - var(--depth)) * 100%), #01060d) 55%,
+    #01060d 100%);
+  transition: background 1.2s ease;
+}
+#bubbles { position: fixed; inset: 0; z-index: 0; pointer-events: none; width: 100%; height: 100%; }
+.wrap {
+  position: relative; z-index: 1;
+  max-width: 560px; margin: 0 auto; min-height: 100%;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 18px 40px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+header.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.logo { font-family: var(--font-display); font-weight: 900; font-size: 20px; letter-spacing: -.02em; cursor: pointer; background: none; border: 0; color: var(--ink); padding: 0; }
+.logo span { color: var(--krill); }
+.gauge { font-family: var(--font-mono); font-size: 13px; color: var(--ink-dim); font-variant-numeric: tabular-nums; text-align: right; }
+.gauge b { color: var(--ink); font-size: 15px; }
+
+button { font-family: var(--font-body); cursor: pointer; }
+button:focus-visible, input:focus-visible, .pack:focus-visible { outline: 2px solid var(--krill); outline-offset: 2px; }
+.btn {
+  border: 0; border-radius: 14px; padding: 15px 20px; font-weight: 800; font-size: 16px;
+  background: var(--krill); color: #2a0d05; transition: transform .1s ease, filter .15s;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn:active { transform: translateY(1px) scale(.99); }
+.btn.ghost { background: var(--glass); color: var(--ink); border: 1px solid var(--glass-line); }
+.btn.small { padding: 9px 14px; font-size: 14px; border-radius: 10px; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; }
+.row > .btn { flex: 1 1 140px; }
+
+/* Home */
+.hero { display: flex; flex-direction: column; gap: 10px; padding-top: 14px; }
+.hero h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(34px, 10vw, 52px); line-height: .95; margin: 0; letter-spacing: -.03em; text-wrap: balance; }
+.hero h1 em { font-style: normal; color: var(--krill); }
+.hero p { margin: 0; color: var(--ink-dim); line-height: 1.5; max-width: 46ch; }
+.modes { display: grid; gap: 10px; }
+.mode {
+  text-align: left; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 12px;
+  background: var(--glass); border: 1px solid var(--glass-line); color: var(--ink);
+  border-radius: 16px; padding: 16px 18px;
+}
+.mode:hover { background: rgba(255,255,255,.11); }
+.mode.primary { background: var(--krill); color: #2a0d05; border-color: transparent; }
+.mode .t { font-family: var(--font-display); font-weight: 700; font-size: 17px; }
+.mode .d { grid-column: 1; font-size: 14px; opacity: .8; line-height: 1.35; }
+.mode .go { grid-row: 1 / span 2; grid-column: 2; font-size: 22px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.stat { background: var(--glass); border-radius: 12px; padding: 10px 12px; }
+.stat .v { font-family: var(--font-mono); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; }
+.stat .k { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-dim); }
+.rules { color: var(--ink-dim); font-size: 14px; line-height: 1.55; }
+.rules summary { cursor: pointer; color: var(--ink); font-weight: 600; }
+.tiers { display: grid; grid-template-columns: auto 1fr auto; gap: 4px 10px; margin-top: 8px; font-size: 13px; }
+.tiers .p { font-family: var(--font-mono); text-align: right; color: var(--ink); }
+
+/* Packs */
+h2.sec { font-family: var(--font-display); font-size: 22px; margin: 6px 0 0; }
+.packs { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.pack { background: var(--glass); border: 1px solid var(--glass-line); color: var(--ink); border-radius: 14px; padding: 14px; text-align: left; }
+.pack:hover { background: rgba(255,255,255,.11); }
+.pack .n { font-weight: 800; }
+.pack .c { font-size: 12px; color: var(--ink-dim); margin-top: 2px; }
+
+/* Play */
+.hud { display: flex; align-items: center; gap: 10px; }
+.dots { display: flex; gap: 5px; flex: 1; }
+.dot { height: 6px; flex: 1; border-radius: 3px; background: var(--glass-line); }
+.dot.done { background: var(--ink-dim); }
+.dot.cur { background: var(--krill); }
+.air { position: relative; height: 12px; border-radius: 6px; background: var(--glass); overflow: hidden; }
+.air > i { position: absolute; inset: 0 auto 0 0; width: 100%; background: linear-gradient(90deg, #7fe3ff, #c8f6ff); border-radius: 6px; }
+.air.low > i { background: linear-gradient(90deg, var(--bad), #ff9aa9); }
+.airlabel { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 12px; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+.card { background: rgba(3,20,36,.55); border: 1px solid var(--glass-line); border-radius: 20px; padding: 22px 20px; display: flex; flex-direction: column; gap: 14px; backdrop-filter: blur(6px); }
+.eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-dim); }
+.prompt { font-family: var(--font-display); font-weight: 700; font-size: clamp(24px, 7vw, 34px); line-height: 1.12; margin: 0; text-wrap: balance; }
+form.answer { display: flex; gap: 8px; }
+form.answer input {
+  flex: 1; min-width: 0; font: 600 18px var(--font-body); color: var(--ink);
+  background: rgba(255,255,255,.08); border: 1.5px solid var(--glass-line); border-radius: 12px; padding: 14px 14px;
+}
+form.answer input::placeholder { color: var(--ink-dim); opacity: .7; }
+.shake { animation: shake .35s; }
+@keyframes shake { 20%,60% { transform: translateX(-7px); } 40%,80% { transform: translateX(7px); } }
+.feedback { min-height: 22px; font-size: 14px; color: var(--ink-dim); }
+.feedback.bad { color: var(--bad); }
+.misses { display: flex; flex-wrap: wrap; gap: 6px; }
+.miss { font-size: 13px; padding: 3px 9px; border-radius: 999px; background: rgba(255,92,122,.12); color: #ffb3c1; text-decoration: line-through; }
+
+/* Reveal */
+.reveal { display: flex; flex-direction: column; gap: 14px; animation: rise .45s ease; }
+@keyframes rise { from { transform: translateY(14px); opacity: .3; } to { transform: none; opacity: 1; } }
+.verdict { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.verdict .ans { font-family: var(--font-display); font-size: 26px; font-weight: 700; }
+.verdict .pts { font-family: var(--font-mono); font-weight: 700; font-size: 26px; color: var(--krill); font-variant-numeric: tabular-nums; }
+.tierbar { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
+.tierbar div { height: 8px; border-radius: 4px; background: var(--glass-line); }
+.tierbar div.on { background: var(--krill); }
+.tiername { font-weight: 800; font-size: 15px; }
+.lists { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.lists h4 { margin: 0 0 6px; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-dim); font-weight: 600; }
+.lists ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 3px; font-size: 14px; }
+.lists li span { font-family: var(--font-mono); font-size: 12px; color: var(--ink-dim); margin-left: 6px; }
+@media (max-width: 380px) { .lists { grid-template-columns: 1fr; } }
+
+/* End */
+.endnum { font-family: var(--font-mono); font-weight: 700; font-size: clamp(48px, 15vw, 76px); line-height: 1; font-variant-numeric: tabular-nums; }
+.endnum small { font-size: .4em; color: var(--ink-dim); }
+.zone { font-family: var(--font-display); font-size: 18px; color: var(--krill); }
+.recap { display: flex; flex-direction: column; gap: 6px; }
+.recap div { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; font-size: 14px; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--glass-line); }
+.recap .q { color: var(--ink-dim); min-width: 0; }
+.recap .a { font-weight: 600; text-align: right; }
+.recap .s { font-family: var(--font-mono); width: 3.2em; text-align: right; color: var(--krill); }
+.share { font-family: var(--font-mono); white-space: pre; background: rgba(0,0,0,.25); border-radius: 12px; padding: 12px; font-size: 14px; overflow-x: auto; }
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--sea-2); padding: 10px 16px; border-radius: 999px; font-weight: 700; z-index: 5; transition: opacity .3s; }
+.plus { position: fixed; z-index: 4; font-family: var(--font-mono); font-weight: 700; color: var(--good); pointer-events: none; animation: floatup 1s ease forwards; }
+.plus.neg { color: var(--bad); }
+@keyframes floatup { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-40px); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+
+<div id="ocean"></div>
+<canvas id="bubbles"></canvas>
+<div class="wrap">
+  <header class="top">
+    <button class="logo" id="logo" aria-label="Home">Krill<span>y</span></button>
+    <div class="gauge" id="gauge"></div>
+  </header>
+  <main id="app"></main>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>/*DATA*/</script>
+<script>
+(() => {
+"use strict";
+const DATA = (window.KRILL_DATA || []).filter(p => p && p.answers);
+const TIERS = [
+  null,
+  { name: "Plankton", pts: 10, note: "Everyone said this" },
+  { name: "Schooler", pts: 20, note: "Swimming with the crowd" },
+  { name: "Off the Reef", pts: 35, note: "A step off the obvious" },
+  { name: "Rare Catch", pts: 55, note: "Few divers find this" },
+  { name: "Deep Cut", pts: 80, note: "Down where the light gives out" },
+  { name: "One in a Krillion", pts: 100, note: "Practically nobody says this" },
+];
+const ROUND_SECONDS = 25, WRONG_PENALTY = 3, PROMPTS_PER_DIVE = 7;
+const ENDLESS_START = 40, ENDLESS_BONUS = [0, 3, 4, 5, 7, 9, 12], SKIP_COST = 6;
+
+// ---------- storage (best-effort) ----------
+const store = {
+  get(k, d) { try { const v = localStorage.getItem("krill:" + k); return v == null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem("krill:" + k, JSON.stringify(v)); } catch {} },
+};
+
+// ---------- answer matching ----------
+function norm(s) {
+  return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/&/g, " and ").replace(/['’`.]/g, "").replace(/[^a-z0-9]+/g, " ").trim()
+    .replace(/^(the|a|an) /, "");
+}
+const cap = s => s.replace(/\b([a-z])/g, (m, c, i) => (i && /^(of|the|and|in|on|a|de|la|le|von|van|da|du|des|di|del)\b/.test(s.slice(i)) ? c : c.toUpperCase()));
+const squash = s => s.replace(/ /g, "");
+function lev(a, b, max) {
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  let prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i]; let best = i;
+    for (let j = 1; j <= b.length; j++) {
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      if (a[i - 2] === b[j - 1] && a[i - 1] === b[j - 2] && i > 1 && j > 1) cur[j] = Math.min(cur[j], prev[j - 2] + 1);
+      best = Math.min(best, cur[j]);
+    }
+    if (best > max) return max + 1;
+    prev = cur;
+  }
+  return prev[b.length];
+}
+const singular = s => s.replace(/(ies)$/, "y").replace(/(ses|xes|ches|shes)$/, m => m.slice(0, -2)).replace(/s$/, "");
+// Build an index per prompt lazily: entries {display, tier, keys:[squashed]}
+const indexCache = new Map();
+function indexFor(p) {
+  if (indexCache.has(p.id)) return indexCache.get(p.id);
+  const entries = [];
+  for (let t = 1; t <= 6; t++) for (const raw of p.answers[t] || []) {
+    const aliases = raw.split("|").map(norm).filter(Boolean);
+    if (!aliases.length) continue;
+    entries.push({ display: cap(raw.split("|")[0]), tier: t, keys: aliases.map(squash) });
+  }
+  indexCache.set(p.id, entries);
+  return entries;
+}
+function judge(p, input) {
+  const k = squash(norm(input));
+  if (k.length < 1) return null;
+  const entries = indexFor(p);
+  for (const e of entries) if (e.keys.includes(k)) return e;
+  const ks = singular(k);
+  for (const e of entries) if (e.keys.some(x => x === ks || singular(x) === ks)) return e;
+  if (k.length >= 6) {
+    const max = k.length >= 10 ? 2 : 1;
+    let best = null, bd = max + 1;
+    for (const e of entries) for (const x of e.keys) {
+      if (x.length < 5) continue;
+      const d = lev(k, x, max);
+      if (d < bd) { bd = d; best = e; }
+    }
+    if (best) return best;
+  }
+  return null;
+}
+
+// ---------- prompt selection ----------
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function pickPrompts(pool, n) {
+  const seen = new Set(store.get("seen", []));
+  let fresh = pool.filter(p => !seen.has(p.id));
+  if (fresh.length < n) { // cycled through everything in this pool — start over for it
+    const ids = new Set(pool.map(p => p.id));
+    store.set("seen", [...seen].filter(id => !ids.has(id)));
+    fresh = pool.slice();
+  }
+  // spread packs out: avoid two prompts from the same pack back-to-back where possible
+  const picked = shuffle(fresh).slice(0, n);
+  for (let i = 1; i < picked.length; i++) if (picked[i].pack === picked[i - 1].pack) {
+    const j = picked.findIndex((q, k) => k > i && q.pack !== picked[i - 1].pack);
+    if (j > 0) [picked[i], picked[j]] = [picked[j], picked[i]];
+  }
+  return picked;
+}
+function markSeen(p) { const s = store.get("seen", []); if (!s.includes(p.id)) { s.push(p.id); store.set("seen", s); } }
+
+// ---------- ui helpers ----------
+const $app = document.getElementById("app");
+const $gauge = document.getElementById("gauge");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+function h(html) { $app.innerHTML = html; }
+function setDepth(m) {
+  const d = Math.max(0, Math.min(1, m / 7000));
+  document.documentElement.style.setProperty("--depth", d.toFixed(3));
+}
+function zoneFor(m) {
+  if (m < 200) return "Sunlight Zone";
+  if (m < 1000) return "Twilight Zone";
+  if (m < 4000) return "Midnight Zone";
+  if (m < 6000) return "The Abyss";
+  return "Hadal Trench";
+}
+function toast(msg) {
+  const t = document.getElementById("toast"); t.textContent = msg; t.hidden = false;
+  clearTimeout(toast._t); toast._t = setTimeout(() => (t.hidden = true), 1800);
+}
+function floater(el, text, neg) {
+  const r = el.getBoundingClientRect(), f = document.createElement("div");
+  f.className = "plus" + (neg ? " neg" : ""); f.textContent = text;
+  f.style.left = (r.right - 60) + "px"; f.style.top = (r.top - 6) + "px";
+  document.body.appendChild(f); setTimeout(() => f.remove(), 1000);
+}
+const packs = () => [...new Set(DATA.map(p => p.pack))].sort();
+
+// ---------- timer ----------
+let timer = null;
+function stopTimer() { if (timer) { cancelAnimationFrame(timer.raf); timer = null; } }
+function startTimer(seconds, onTick, onEnd) {
+  stopTimer();
+  const t = { left: seconds, last: performance.now(), raf: 0, paused: false };
+  const loop = now => {
+    if (!t.paused) { t.left -= (now - t.last) / 1000; }
+    t.last = now;
+    if (t.left <= 0) { t.left = 0; onTick(0); stopTimer(); onEnd(); return; }
+    onTick(t.left);
+    t.raf = requestAnimationFrame(loop);
+  };
+  t.raf = requestAnimationFrame(loop);
+  timer = t;
+  return t;
+}
+
+// ---------- home ----------
+function home() {
+  stopTimer(); setDepth(0); $gauge.innerHTML = "";
+  const st = store.get("stats", { dives: 0, best: 0, endlessBest: 0, finds: 0 });
+  h(`
+  <section class="hero">
+    <h1>Dive for the <em>rare</em> answer.</h1>
+    <p>Seven prompts. One answer each. Obvious answers keep you near the surface; the answers nobody else thinks of take you to the bottom of the sea.</p>
+  </section>
+  <div class="modes">
+    <button class="mode primary" id="m-dive"><span class="t">New Dive</span><span class="d">7 random prompts, ${ROUND_SECONDS}s each. Play as many as you like.</span><span class="go">→</span></button>
+    <button class="mode" id="m-endless"><span class="t">Endless Dive</span><span class="d">One air tank. Correct answers refill it, rarer ones refill more.</span><span class="go">∞</span></button>
+    <button class="mode" id="m-packs"><span class="t">Themed Packs</span><span class="d">${packs().length} packs, ${DATA.length} prompts. Dive into one topic.</span><span class="go">≡</span></button>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="v">${st.dives}</div><div class="k">Dives</div></div>
+    <div class="stat"><div class="v">${(st.best * 10).toLocaleString()}m</div><div class="k">Deepest dive</div></div>
+    <div class="stat"><div class="v">${st.endlessBest}</div><div class="k">Endless best</div></div>
+  </div>
+  <details class="rules">
+    <summary>How scoring works</summary>
+    <p>Type one valid answer per prompt. A wrong guess costs ${WRONG_PENALTY} seconds but you can keep guessing. Your first correct answer locks in. Rarer answers score more, and every point is 10 metres of depth, so a perfect dive reaches 7,000 m.</p>
+    <div class="tiers">${TIERS.slice(1).map((t, i) => `<span>${"●".repeat(i + 1)}</span><span>${t.name}</span><span class="p">${t.pts}</span>`).join("")}</div>
+  </details>`);
+  document.getElementById("m-dive").onclick = () => startDive(DATA, "Open Ocean");
+  document.getElementById("m-endless").onclick = () => startEndless();
+  document.getElementById("m-packs").onclick = packsView;
+}
+
+function packsView() {
+  stopTimer();
+  h(`<h2 class="sec">Themed Packs</h2>
+  <div class="packs">${packs().map(name => {
+    const n = DATA.filter(p => p.pack === name).length;
+    return `<button class="pack" data-pack="${esc(name)}"><div class="n">${esc(name)}</div><div class="c">${n} prompts</div></button>`;
+  }).join("")}</div>
+  <div class="row"><button class="btn ghost" id="back">Back</button></div>`);
+  $app.querySelectorAll(".pack").forEach(b => b.onclick = () => startDive(DATA.filter(p => p.pack === b.dataset.pack), b.dataset.pack));
+  document.getElementById("back").onclick = home;
+}
+
+// ---------- classic dive ----------
+let game = null;
+function startDive(pool, label) {
+  game = { mode: "dive", label, pool, prompts: pickPrompts(pool, Math.min(PROMPTS_PER_DIVE, pool.length)), i: 0, results: [], score: 0 };
+  playPrompt();
+}
+function gaugeDive() {
+  $gauge.innerHTML = `<b>${(game.score * 10).toLocaleString()} m</b><br>${game.score} pts`;
+}
+function playPrompt() {
+  const p = game.prompts[game.i];
+  markSeen(p); gaugeDive();
+  const misses = [];
+  h(`
+  <div class="hud"><div class="dots">${game.prompts.map((_, k) => `<div class="dot ${k < game.i ? "done" : k === game.i ? "cur" : ""}"></div>`).join("")}</div></div>
+  <div class="card" id="card">
+    <div class="eyebrow">${esc(game.label)} · ${game.i + 1} of ${game.prompts.length} · ${esc(p.pack)}</div>
+    <h2 class="prompt">${esc(p.prompt)}</h2>
+    <div><div class="air" id="air"><i></i></div><div class="airlabel"><span>Air</span><span id="secs">${ROUND_SECONDS}s</span></div></div>
+    <form class="answer" id="form" autocomplete="off">
+      <input id="guess" type="text" placeholder="Your rarest answer…" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" aria-label="Your answer">
+      <button class="btn" type="submit">Dive</button>
+    </form>
+    <div class="feedback" id="fb">Think past the first thing that comes to mind.</div>
+    <div class="misses" id="misses"></div>
+  </div>`);
+  const $in = document.getElementById("guess"), $air = document.getElementById("air"), $secs = document.getElementById("secs");
+  $in.focus();
+  const t = startTimer(ROUND_SECONDS, left => {
+    $air.firstElementChild.style.width = (left / ROUND_SECONDS * 100) + "%";
+    $air.classList.toggle("low", left < 6);
+    $secs.textContent = Math.ceil(left) + "s";
+  }, () => finishPrompt(p, null, misses));
+  document.getElementById("form").onsubmit = e => {
+    e.preventDefault();
+    const v = $in.value.trim(); if (!v) return;
+    const hit = judge(p, v);
+    if (hit) { stopTimer(); finishPrompt(p, hit, misses, v); return; }
+    misses.push(v); t.left = Math.max(0, t.left - WRONG_PENALTY);
+    const fb = document.getElementById("fb"); fb.textContent = `“${v}” isn't on the list. −${WRONG_PENALTY}s`; fb.className = "feedback bad";
+    document.getElementById("misses").innerHTML = misses.map(m => `<span class="miss">${esc(m)}</span>`).join("");
+    $in.value = ""; $in.classList.remove("shake"); void $in.offsetWidth; $in.classList.add("shake");
+    floater($air, `−${WRONG_PENALTY}s`, true);
+  };
+}
+function tierLists(p, hit) {
+  const entries = indexFor(p);
+  const common = entries.filter(e => e.tier <= 2).slice(0, 5);
+  const rare = shuffle(entries.filter(e => e.tier >= 5 && e !== hit)).slice(0, 5);
+  return `<div class="lists">
+    <div><h4>What most people say</h4><ul>${common.map(e => `<li>${esc(e.display)}<span>${TIERS[e.tier].pts}</span></li>`).join("")}</ul></div>
+    <div><h4>Deep finds you could've had</h4><ul>${rare.map(e => `<li>${esc(e.display)}<span>${TIERS[e.tier].pts}</span></li>`).join("")}</ul></div>
+  </div>`;
+}
+function finishPrompt(p, hit, misses, typed) {
+  const pts = hit ? TIERS[hit.tier].pts : 0;
+  game.score += pts;
+  game.results.push({ prompt: p.prompt, answer: hit ? hit.display : null, tier: hit ? hit.tier : 0, pts });
+  gaugeDive(); setDepth(game.score * 10);
+  const last = game.i === game.prompts.length - 1;
+  const card = document.getElementById("card");
+  card.innerHTML = `
+    <div class="eyebrow">${esc(p.prompt)}</div>
+    <div class="reveal">
+      ${hit ? `
+        <div class="verdict"><span class="ans">${esc(hit.display)}</span><span class="pts">+${pts}</span></div>
+        <div class="tierbar">${[1,2,3,4,5,6].map(k => `<div class="${k <= hit.tier ? "on" : ""}"></div>`).join("")}</div>
+        <div><div class="tiername">${TIERS[hit.tier].name}</div><div class="feedback">${TIERS[hit.tier].note}${typed && squash(norm(typed)) !== squash(norm(hit.display)) ? ` · counted “${esc(typed)}” as ${esc(hit.display)}` : ""}</div></div>`
+      : `<div class="verdict"><span class="ans">Out of air</span><span class="pts">+0</span></div>
+         <div class="feedback">No valid answer in time.</div>`}
+      ${tierLists(p, hit)}
+      <button class="btn" id="next">${last ? "Surface & see results" : "Keep diving ↓"}</button>
+    </div>`;
+  const nb = document.getElementById("next"); nb.focus();
+  nb.onclick = () => { if (last) endDive(); else { game.i++; playPrompt(); } };
+}
+function shareText(results, score) {
+  const sq = ["⬛", "🟦", "🟦", "🟩", "🟨", "🟧", "🟥"];
+  return `Krilly · ${(score * 10).toLocaleString()} m\n${results.map(r => sq[r.tier]).join("")}\n${zoneFor(score * 10)} · ${score}/700`;
+}
+function endDive() {
+  stopTimer();
+  const st = store.get("stats", { dives: 0, best: 0, endlessBest: 0, finds: 0 });
+  st.dives++; const isBest = game.score > st.best; st.best = Math.max(st.best, game.score);
+  st.finds += game.results.filter(r => r.tier >= 5).length; store.set("stats", st);
+  const m = game.score * 10;
+  const txt = shareText(game.results, game.score);
+  const pool = game.pool, label = game.label;
+  h(`<div class="card">
+    <div class="eyebrow">${esc(label)} · You surfaced from</div>
+    <div class="endnum">${m.toLocaleString()}<small> m</small></div>
+    <div class="zone">${zoneFor(m)}${isBest ? " · new personal record" : ""}</div>
+    <div class="recap">${game.results.map(r => `<div><span class="q">${esc(r.prompt)}</span><span class="a">${r.answer ? esc(r.answer) : "—"}</span><span class="s">${r.pts}</span></div>`).join("")}</div>
+    <div class="share" id="share">${esc(txt)}</div>
+    <div class="row"><button class="btn" id="again">Dive again</button><button class="btn ghost" id="copy">Copy result</button></div>
+    <div class="row"><button class="btn ghost small" id="home">Home</button></div>
+  </div>`);
+  document.getElementById("again").onclick = () => startDive(pool, label);
+  document.getElementById("home").onclick = home;
+  document.getElementById("copy").onclick = () => copy(txt);
+  document.getElementById("again").focus();
+}
+function copy(txt) {
+  try {
+    navigator.clipboard.writeText(txt).then(() => toast("Copied"), () => selectShare());
+  } catch { selectShare(); }
+}
+function selectShare() {
+  const el = document.getElementById("share"); const r = document.createRange(); r.selectNodeContents(el);
+  const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast("Selected — copy it from here");
+}
+
+// ---------- endless ----------
+function startEndless() {
+  game = { mode: "endless", queue: pickPrompts(DATA, DATA.length), score: 0, count: 0, results: [] };
+  const $air0 = () => document.getElementById("air");
+  game.timer = startTimer(ENDLESS_START, left => {
+    const a = $air0(); if (!a) return;
+    a.firstElementChild.style.width = Math.min(100, left / ENDLESS_START * 100) + "%";
+    a.classList.toggle("low", left < 8);
+    const s = document.getElementById("secs"); if (s) s.textContent = Math.ceil(left) + "s";
+  }, endEndless);
+  nextEndless();
+}
+function nextEndless() {
+  if (!game.queue.length) game.queue = pickPrompts(DATA, DATA.length);
+  const p = game.queue.shift(); markSeen(p); game.cur = p;
+  $gauge.innerHTML = `<b>${(game.score * 10).toLocaleString()} m</b><br>${game.count} found`;
+  setDepth(game.score * 10 / 3);
+  h(`<div class="card" id="card">
+    <div class="eyebrow">Endless Dive · #${game.count + 1} · ${esc(p.pack)}</div>
+    <h2 class="prompt">${esc(p.prompt)}</h2>
+    <div><div class="air" id="air"><i></i></div><div class="airlabel"><span>Air tank</span><span id="secs"></span></div></div>
+    <form class="answer" id="form" autocomplete="off">
+      <input id="guess" type="text" placeholder="Answer fast, answer rare…" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" aria-label="Your answer">
+      <button class="btn" type="submit">Dive</button>
+    </form>
+    <div class="feedback" id="fb">Rarer answers refill more air. Skip costs ${SKIP_COST}s.</div>
+    <div class="row"><button class="btn ghost small" id="skip" type="button">Skip prompt</button></div>
+    <div class="misses" id="misses"></div>
+  </div>`);
+  const $in = document.getElementById("guess"); $in.focus();
+  const misses = [];
+  document.getElementById("skip").onclick = () => {
+    game.timer.left = Math.max(0.01, game.timer.left - SKIP_COST);
+    game.results.push({ prompt: p.prompt, answer: null, tier: 0, pts: 0 }); nextEndless();
+  };
+  document.getElementById("form").onsubmit = e => {
+    e.preventDefault();
+    const v = $in.value.trim(); if (!v || !timer) return;
+    const hit = judge(p, v), $air = document.getElementById("air");
+    if (hit) {
+      const pts = TIERS[hit.tier].pts, bonus = ENDLESS_BONUS[hit.tier];
+      game.score += pts; game.count++; game.timer.left += bonus;
+      game.results.push({ prompt: p.prompt, answer: hit.display, tier: hit.tier, pts });
+      toast(`${hit.display} · ${TIERS[hit.tier].name} +${pts}`);
+      floater($air, `+${bonus}s`);
+      nextEndless();
+    } else {
+      misses.push(v); game.timer.left = Math.max(0.01, game.timer.left - WRONG_PENALTY);
+      const fb = document.getElementById("fb"); fb.textContent = `“${v}” isn't on the list. −${WRONG_PENALTY}s`; fb.className = "feedback bad";
+      document.getElementById("misses").innerHTML = misses.map(m => `<span class="miss">${esc(m)}</span>`).join("");
+      $in.value = ""; $in.classList.remove("shake"); void $in.offsetWidth; $in.classList.add("shake");
+      floater($air, `−${WRONG_PENALTY}s`, true);
+    }
+  };
+}
+function endEndless() {
+  const st = store.get("stats", { dives: 0, best: 0, endlessBest: 0, finds: 0 });
+  const isBest = game.count > st.endlessBest; st.endlessBest = Math.max(st.endlessBest, game.count); store.set("stats", st);
+  const p = game.cur;
+  h(`<div class="card">
+    <div class="eyebrow">Endless Dive · Air ran out on “${esc(p.prompt)}”</div>
+    <div class="endnum">${game.count}<small> found</small></div>
+    <div class="zone">${game.score} pts · ${(game.score * 10).toLocaleString()} m${isBest ? " · new record" : ""}</div>
+    ${tierLists(p, null)}
+    <div class="recap">${game.results.slice(-12).map(r => `<div><span class="q">${esc(r.prompt)}</span><span class="a">${r.answer ? esc(r.answer) : "skipped"}</span><span class="s">${r.pts}</span></div>`).join("")}</div>
+    <div class="row"><button class="btn" id="again">Dive again</button><button class="btn ghost" id="home">Home</button></div>
+  </div>`);
+  document.getElementById("again").onclick = startEndless;
+  document.getElementById("home").onclick = home;
+}
+
+document.getElementById("logo").onclick = home;
+document.addEventListener("visibilitychange", () => { if (timer) timer.paused = document.hidden; });
+
+// ---------- ambient bubbles ----------
+(() => {
+  const c = document.getElementById("bubbles"), ctx = c.getContext("2d");
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  let W, H, B = [];
+  const size = () => { W = c.width = innerWidth * devicePixelRatio; H = c.height = innerHeight * devicePixelRatio; };
+  size(); addEventListener("resize", size);
+  for (let i = 0; i < 40; i++) B.push({ x: Math.random(), y: Math.random(), r: 1 + Math.random() * 3, s: .0004 + Math.random() * .0012, w: Math.random() * 6 });
+  const draw = t => {
+    ctx.clearRect(0, 0, W, H);
+    for (const b of B) {
+      b.y -= b.s; if (b.y < -0.02) { b.y = 1.02; b.x = Math.random(); }
+      const x = (b.x + Math.sin(t / 1400 + b.w) * .006) * W;
+      ctx.beginPath(); ctx.arc(x, b.y * H, b.r * devicePixelRatio, 0, 7);
+      ctx.strokeStyle = "rgba(200,240,255,.28)"; ctx.lineWidth = devicePixelRatio; ctx.stroke();
+    }
+    requestAnimationFrame(draw);
+  };
+  requestAnimationFrame(draw);
+})();
+
+if (!DATA.length) h(`<div class="card"><h2 class="prompt">No prompts loaded.</h2></div>`);
+else home();
+})();
+</script>
