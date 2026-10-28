@@ -54,6 +54,21 @@ body {
   padding-block: 18px 40px;
   display: flex; flex-direction: column; gap: 18px;
 }
+#depthmap {
+  position: fixed; z-index: 1; right: env(safe-area-inset-right, 0px); top: calc(70px + env(safe-area-inset-top, 0px)); bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  width: 58px; pointer-events: none; font-family: var(--font-mono); font-size: 10px; color: var(--ink-dim);
+}
+#depthmap .rail { position: absolute; right: 14px; top: 0; bottom: 0; width: 2px; background: linear-gradient(var(--glass-line), rgba(255,255,255,.05)); }
+#depthmap .mark { position: absolute; right: 10px; transform: translateY(-50%); display: flex; flex-direction: column; align-items: flex-end; gap: 0; line-height: 1.15; padding-right: 10px; border-right: 10px solid transparent; }
+#depthmap .mark::after { content: ""; position: absolute; right: -6px; top: 50%; width: 8px; height: 1px; background: var(--ink-dim); }
+#depthmap .ml { font-family: var(--font-body); font-size: 10px; opacity: .8; }
+#depthmap .mi { font-size: 13px; }
+#depthmap .diver { position: absolute; right: 6px; transform: translateY(-50%); transition: top 1.4s cubic-bezier(.3,.7,.3,1); display: flex; align-items: center; gap: 6px; }
+#depthmap .diver::after { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--krill); box-shadow: 0 0 0 4px var(--krill-soft), 0 0 18px var(--krill); }
+#depthmap .diver span { background: var(--krill); color: #2a0d05; font-weight: 700; padding: 2px 6px; border-radius: 6px; white-space: nowrap; }
+#depthmap .diver span { position: absolute; right: 22px; }
+@media (max-width: 700px) { .wrap { padding-right: max(66px, calc(env(safe-area-inset-right, 0px) + 66px)); } #depthmap .ml, #depthmap .diver span { display: none; } }
+@media (min-width: 701px) { #depthmap { right: max(24px, calc(50vw - 380px)); width: 110px; } }
 header.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .logo { font-family: var(--font-display); font-weight: 900; font-size: 20px; letter-spacing: -.02em; cursor: pointer; background: none; border: 0; color: var(--ink); padding: 0; }
 .logo span { color: var(--krill); }
@@ -168,6 +183,7 @@ form.answer input::placeholder { color: var(--ink-dim); opacity: .7; }
 </style>
 
 <div id="ocean"></div>
+<aside id="depthmap" aria-label="Depth map"></aside>
 <canvas id="bubbles"></canvas>
 <div class="wrap">
   <header class="top">
@@ -902,15 +918,15 @@ window.KRILL_DATA.push(
 const DATA = (window.KRILL_DATA || []).filter(p => p && p.answers);
 const TIERS = [
   null,
-  { name: "Plankton", pts: 10, note: "Everyone said this" },
-  { name: "Schooler", pts: 20, note: "Swimming with the crowd" },
-  { name: "Off the Reef", pts: 35, note: "A step off the obvious" },
-  { name: "Rare Catch", pts: 55, note: "Few divers find this" },
-  { name: "Deep Cut", pts: 80, note: "Down where the light gives out" },
+  { name: "Plankton", pts: 10, note: "The answer everyone gives" },
+  { name: "Too Clever", pts: 15, note: "The clever pick half the ocean also thought of" },
+  { name: "Schooler", pts: 30, note: "Swimming with a decent-sized school" },
+  { name: "Rare", pts: 60, note: "Few divers find this" },
+  { name: "Deep Cut", pts: 85, note: "Down where the light gives out" },
   { name: "One in a Krillion", pts: 100, note: "Practically nobody says this" },
 ];
 const ROUND_SECONDS = 25, WRONG_PENALTY = 3, PROMPTS_PER_DIVE = 7;
-const ENDLESS_START = 40, ENDLESS_BONUS = [0, 3, 4, 5, 7, 9, 12], SKIP_COST = 6;
+const ENDLESS_START = 40, ENDLESS_BONUS = [0, 3, 3, 5, 7, 9, 12], SKIP_COST = 6;
 
 // ---------- storage (best-effort) ----------
 const store = {
@@ -1026,15 +1042,31 @@ const $gauge = document.getElementById("gauge");
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 function h(html) { $app.innerHTML = html; }
 function setDepth(m) {
+  const dv = document.getElementById("diver");
+  if (dv) { dv.style.top = mapY(m) + "%"; document.getElementById("diverm").textContent = Math.round(m).toLocaleString() + " m"; }
   const d = Math.max(0, Math.min(1, m / 7000));
   document.documentElement.style.setProperty("--depth", d.toFixed(3));
 }
 function zoneFor(m) {
   if (m < 200) return "Sunlight Zone";
   if (m < 1000) return "Twilight Zone";
-  if (m < 4000) return "Midnight Zone";
+  if (m < 3800) return "Midnight Zone";
+  if (m < 4000) return "The Shipwreck";
   if (m < 6000) return "The Abyss";
-  return "Hadal Trench";
+  if (m < 7000) return "Hadal Zone";
+  return "Trench Floor";
+}
+// Depth map: square-root scale so the shallow zones get room on screen.
+const MAP_MAX = 7000, mapY = m => Math.sqrt(Math.min(m, MAP_MAX) / MAP_MAX) * 100;
+const MARKS = [
+  [0, "Surface", ""], [200, "Twilight", "🐟"], [1000, "Midnight", "🦑"], [2000, "", "🐡"],
+  [3800, "Shipwreck", "⚓"], [6000, "Hadal", "🦐"], [7000, "Trench floor", ""],
+];
+function buildMap() {
+  const el = document.getElementById("depthmap");
+  el.innerHTML = `<div class="rail"></div>${MARKS.map(([m, label, icon]) =>
+    `<div class="mark" style="top:${mapY(m)}%"><span class="mm">${m.toLocaleString()}</span>${label ? `<span class="ml">${label}</span>` : ""}${icon ? `<span class="mi" aria-hidden="true">${icon}</span>` : ""}</div>`).join("")}
+    <div class="diver" id="diver" style="top:0%"><span id="diverm">0 m</span></div>`;
 }
 function toast(msg) {
   const t = document.getElementById("toast"); t.textContent = msg; t.hidden = false;
@@ -1209,7 +1241,7 @@ function finishPrompt(p, hit, misses, typed) {
   nb.onclick = () => { if (last) endDive(); else { game.i++; playPrompt(); } };
 }
 function shareText(results, score) {
-  const sq = ["⬛", "🟦", "🟦", "🟩", "🟨", "🟧", "🟥"];
+  const sq = ["⬛", "🟦", "🟪", "🟩", "🟨", "🟧", "🟥"];
   return `Krilly · ${(score * 10).toLocaleString()} m\n${results.map(r => sq[r.tier]).join("")}\n${zoneFor(score * 10)} · ${score}/700`;
 }
 function endDive() {
@@ -1261,7 +1293,7 @@ function nextEndless() {
   if (!game.queue.length) game.queue = pickPrompts(POOL, POOL.length);
   const p = game.queue.shift(); markSeen(p); game.cur = p;
   $gauge.innerHTML = `<b>${(game.score * 10).toLocaleString()} m</b><br>${game.count} found`;
-  setDepth(game.score * 10 / 3);
+  setDepth(game.score * 10);
   h(`<div class="card" id="card">
     <div class="eyebrow">Endless Dive · #${game.count + 1} · ${esc(p.pack)}</div>
     <h2 class="prompt">${esc(p.prompt)}</h2>
@@ -1317,6 +1349,7 @@ function endEndless() {
 }
 
 document.getElementById("logo").onclick = home;
+buildMap();
 document.addEventListener("visibilitychange", () => { if (timer) timer.paused = document.hidden; });
 
 // ---------- ambient bubbles ----------
