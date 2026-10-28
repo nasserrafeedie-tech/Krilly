@@ -157,6 +157,7 @@ form.answer input::placeholder { color: var(--ink-dim); opacity: .7; }
 .tierbar div { height: 8px; border-radius: 4px; background: var(--glass-line); }
 .tierbar div.on { background: var(--krill); }
 .fixed { font-size: 13px; color: var(--ink-dim); }
+form.answer.busy { opacity: .6; pointer-events: none; }
 .fixed s { opacity: .7; }
 .tiername { font-weight: 800; font-size: 15px; }
 .lists { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -1016,6 +1017,54 @@ function judge(p, input) {
   return null;
 }
 
+// ---------- Claude as backup judge ----------
+// Answers missing from the list are checked by Claude when the page runs inside a Claude viewer.
+let sampler = null, aiOff = false;
+try { window.claude?.use?.("sample").then(s => { sampler = s; }, () => {}); } catch {}
+const aiCache = new Map();
+async function aiJudge(p, input) {
+  if (!sampler || aiOff) return null;
+  const key = p.id + "|" + squash(norm(input));
+  if (aiCache.has(key)) return aiCache.get(key);
+  const examples = indexFor(p).filter((_, i) => i % 7 === 0).slice(0, 25).map(e => e.display).join(", ");
+  try {
+    const r = await sampler.json(
+      `You are the strict answer judge for a trivia game where players name things that fit a prompt.\n` +
+      `Prompt: "${p.prompt}"\nPlayer typed: "${input}"\n` +
+      `Some accepted answers, for calibration only (the list is not exhaustive): ${examples}\n` +
+      `Decide whether what the player typed is a real, correct answer to the prompt, respecting every condition in the prompt. ` +
+      `Allow misspellings and alternate names, but not vague, made-up or partially correct answers.\n` +
+      `Reply with only JSON: {"valid": true or false, "answer": "the standard name of the answer", "rarity": 1-6} where rarity says how few players would give it: ` +
+      `1 = the obvious answer most people say, 2 = a common pick, 3 = known but not top of mind, 4 = needs real knowledge, 5 = a deep cut, 6 = almost nobody would think of it.`,
+      { modelTier: "quick", cache: { gcTime: 86400000 } });
+    let hit = null;
+    if (r && r.valid === true && typeof r.answer === "string" && r.answer.trim()) {
+      hit = judge(p, r.answer);
+      if (!hit) {
+        const tier = Math.max(2, Math.min(6, Math.round(Number(r.rarity)) || 5));
+        hit = { display: cap(norm(r.answer) || norm(input)), tier, keys: [squash(norm(r.answer))], phrases: [norm(r.answer)], ai: true };
+        indexFor(p).push(hit);
+      }
+    }
+    aiCache.set(key, hit);
+    return hit;
+  } catch (e) {
+    if (["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"].includes(e && e.code)) aiOff = true;
+    return null;
+  }
+}
+// Resolve a guess: the list first, then Claude, with the clock paused while Claude thinks.
+async function resolveGuess(p, v, t) {
+  const hit = judge(p, v);
+  if (hit || !sampler || aiOff) return hit;
+  const fb = document.getElementById("fb");
+  if (fb) { fb.textContent = `Checking “${v}” with Claude…`; fb.className = "feedback"; }
+  const form = document.getElementById("form"); if (form) form.classList.add("busy");
+  if (t) t.paused = true;
+  try { return await aiJudge(p, v); }
+  finally { if (t && !document.hidden) t.paused = false; if (form) form.classList.remove("busy"); }
+}
+
 // ---------- prompt selection ----------
 function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 function pickPrompts(pool, n) {
@@ -1196,10 +1245,12 @@ function playPrompt() {
     $air.classList.toggle("low", left < 6);
     $secs.textContent = Math.ceil(left) + "s";
   }, () => finishPrompt(p, null, misses));
-  document.getElementById("form").onsubmit = e => {
+  let checking = false;
+  document.getElementById("form").onsubmit = async e => {
     e.preventDefault();
-    const v = $in.value.trim(); if (!v) return;
-    const hit = judge(p, v);
+    const v = $in.value.trim(); if (!v || checking || timer !== t) return;
+    checking = true; const hit = await resolveGuess(p, v, t); checking = false;
+    if (timer !== t) return; // the round ended while Claude was checking
     if (hit) { stopTimer(); finishPrompt(p, hit, misses, v); return; }
     misses.push(v); t.left = Math.max(0, t.left - WRONG_PENALTY);
     const fb = document.getElementById("fb"); fb.textContent = `“${v}” isn't on the list. −${WRONG_PENALTY}s`; fb.className = "feedback bad";
@@ -1231,6 +1282,7 @@ function finishPrompt(p, hit, misses, typed) {
         <div class="verdict"><span class="ans">${esc(hit.display)}</span><span class="pts">+${pts}</span></div>
         <div class="tierbar">${[1,2,3,4,5,6].map(k => `<div class="${k <= hit.tier ? "on" : ""}"></div>`).join("")}</div>
         <div><div class="tiername">${TIERS[hit.tier].name}</div><div class="feedback">${TIERS[hit.tier].note}</div></div>
+        ${hit.ai ? `<div class="fixed">Not on the list, verified by Claude</div>` : ""}
         ${typed && squash(norm(typed)) !== squash(norm(hit.display)) ? `<div class="fixed"><s>${esc(typed)}</s> → ${esc(hit.display)}</div>` : ""}`
       : `<div class="verdict"><span class="ans">Out of air</span><span class="pts">+0</span></div>
          <div class="feedback">No valid answer in time.</div>`}
@@ -1312,10 +1364,13 @@ function nextEndless() {
     game.timer.left = Math.max(0.01, game.timer.left - SKIP_COST);
     game.results.push({ prompt: p.prompt, answer: null, tier: 0, pts: 0 }); nextEndless();
   };
-  document.getElementById("form").onsubmit = e => {
+  let checking = false;
+  document.getElementById("form").onsubmit = async e => {
     e.preventDefault();
-    const v = $in.value.trim(); if (!v || !timer) return;
-    const hit = judge(p, v), $air = document.getElementById("air");
+    const v = $in.value.trim(); if (!v || !timer || checking) return;
+    checking = true; const hit = await resolveGuess(p, v, game.timer); checking = false;
+    if (!timer || game.cur !== p) return;
+    const $air = document.getElementById("air");
     if (hit) {
       const pts = TIERS[hit.tier].pts, bonus = ENDLESS_BONUS[hit.tier];
       game.score += pts; game.count++; game.timer.left += bonus;
