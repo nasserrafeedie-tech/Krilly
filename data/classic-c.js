@@ -1,6 +1,6 @@
 window.KRILL_DATA = window.KRILL_DATA || [];
 window.KRILL_DATA.push(
-{ id: "c-element", pack: "Science & Tech", prompt: "Name a chemical element", answers: {
+{ classic: true, id: "c-element", pack: "Science & Tech", prompt: "Name a chemical element", answers: {
   1: ["oxygen", "hydrogen", "gold", "carbon", "iron", "helium", "nitrogen"],
   2: ["silver", "copper", "sodium", "calcium", "aluminum|aluminium", "lead", "uranium", "neon", "chlorine", "potassium", "mercury", "zinc", "sulfur|sulphur", "lithium", "magnesium", "platinum", "silicon"],
   3: ["phosphorus", "fluorine", "iodine", "plutonium", "tin", "nickel", "titanium", "argon", "cobalt", "chromium", "radon", "radium", "tungsten|wolfram", "krypton", "xenon", "boron", "beryllium", "arsenic", "manganese", "bismuth"],
@@ -8,7 +8,7 @@ window.KRILL_DATA.push(
   5: ["lanthanum", "cerium", "europium", "gadolinium", "yttrium", "ytterbium", "erbium", "terbium", "niobium", "tantalum", "hafnium", "rhenium", "rhodium", "ruthenium", "technetium", "promethium", "samarium", "actinium", "protactinium", "neptunium", "berkelium", "fermium", "mendelevium", "lawrencium", "thallium", "copernicium", "flerovium", "livermorium"],
   6: ["praseodymium", "dysprosium", "holmium", "thulium", "lutetium", "rutherfordium", "dubnium", "seaborgium", "bohrium", "hassium", "meitnerium", "darmstadtium", "roentgenium"] } },
 
-{ id: "c-moon", pack: "Science & Tech", prompt: "Name a moon in our solar system", answers: {
+{ classic: true, id: "c-moon", pack: "Science & Tech", prompt: "Name a moon in our solar system", answers: {
   1: ["moon|luna|earths moon", "titan", "europa", "ganymede"],
   2: ["io", "callisto", "phobos", "deimos", "triton", "enceladus"],
   3: ["charon", "mimas", "oberon", "titania", "miranda", "ariel", "umbriel", "rhea", "iapetus", "dione", "tethys"],
@@ -16,7 +16,7 @@ window.KRILL_DATA.push(
   5: ["thebe", "metis", "adrastea", "elara", "pasiphae", "sinope", "carme", "ananke", "lysithea", "leda", "cordelia", "ophelia", "bianca", "cressida", "desdemona", "juliet", "portia", "rosalind", "belinda", "perdita", "cupid", "mab", "sycorax", "caliban", "galatea", "despina", "thalassa", "naiad", "kerberos", "styx", "daphnis", "helene", "telesto", "calypso", "hiiaka", "namaka", "dactyl", "vanth", "weywot", "hippocamp"],
   6: ["prospero", "setebos", "stephano", "trinculo", "francisco", "margaret", "ferdinand", "halimede", "sao", "laomedeia", "psamathe", "neso", "polydeuces", "ymir", "paaliaq", "siarnaq", "tarvos", "kiviuq", "ijiraq", "skathi", "mundilfari", "erriapus", "albiorix", "suttungr", "thrymr", "narvi", "methone", "pallene", "anthe", "aegaeon", "themisto", "callirrhoe", "carpo", "kalyke", "iocaste", "harpalyke", "praxidike", "taygete", "chaldene", "megaclite", "autonoe", "isonoe", "erinome", "kale", "eukelade", "euanthe", "thyone", "hermippe", "aitne", "sponde", "arche", "kallichore", "helike", "euporie", "orthosie", "eurydome", "mneme", "hegemone", "aoede", "thelxinoe", "cyllene", "kore", "herse", "valetudo", "ersa", "pandia", "philophrosyne", "eupheme", "linus", "actaea", "ilmare", "xiangliu"] } },
 
-{ id: "c-bone", pack: "Science & Tech", prompt: "Name a bone in the human body", answers: {
+{ classic: true, id: "c-bone", pack: "Science & Tech", prompt: "Name a bone in the human body", answers: {
   1: ["femur|thigh bone|thighbone", "skull|cranium", "rib|ribs", "tibia|shinbone|shin bone", "humerus|funny bone"],
   2: ["fibula", "radius", "ulna", "pelvis|hip bone|hipbone|coxal bone|os coxae|innominate bone", "clavicle|collarbone|collar bone", "scapula|shoulder blade", "sternum|breastbone|breast bone", "patella|kneecap|knee cap", "mandible|jaw|jawbone|jaw bone|lower jaw", "vertebra|vertebrae|backbone"],
   3: ["coccyx|tailbone|tail bone", "sacrum", "phalanges|phalanx|finger bone|toe bone", "metacarpal|metacarpals", "metatarsal|metatarsals", "carpal|carpals|carpal bones|wrist bone", "tarsal|tarsals|tarsal bones", "maxilla|upper jaw|maxillae", "hyoid|hyoid bone", "stapes|stirrup", "incus|anvil", "malleus|hammer", "calcaneus|heel bone|calcaneum", "ilium", "ischium", "pubis|pubic bone", "zygomatic bone|zygomatic|cheekbone|cheek bone|malar"],
@@ -24,7 +24,7 @@ window.KRILL_DATA.push(
   5: ["lacrimal bone|lacrimal", "vomer", "palatine bone|palatine", "triquetrum|triquetral", "pisiform", "trapezium", "trapezoid", "capitate", "hamate", "cuneiform|medial cuneiform|intermediate cuneiform|lateral cuneiform", "inferior nasal concha|turbinate|inferior turbinate|nasal concha", "manubrium"],
   6: ["fabella", "os trigonum", "wormian bone|sutural bone", "os peroneum", "os naviculare|accessory navicular"] } },
 
-{ id: "c-organ", pack: "Science & Tech", prompt: "Name an organ of the human body", answers: {
+{ classic: true, id: "c-organ", pack: "Science & Tech", prompt: "Name an organ of the human body", answers: {
   1: ["heart", "brain", "lungs|lung", "liver", "kidneys|kidney", "stomach", "skin"],
   2: ["intestines|intestine|bowel|bowels|gut", "pancreas", "spleen", "bladder|urinary bladder", "gallbladder|gall bladder", "eyes|eye", "small intestine", "large intestine|colon"],
   3: ["appendix", "thyroid|thyroid gland", "esophagus|oesophagus|gullet", "uterus|womb", "ovaries|ovary", "testes|testicles|testis|testicle", "prostate|prostate gland", "tongue", "ears|ear", "nose", "tonsils|tonsil", "larynx|voice box", "trachea|windpipe", "rectum"],
@@ -32,7 +32,7 @@ window.KRILL_DATA.push(
   5: ["jejunum", "ileum", "epiglottis", "mesentery", "seminal vesicles|seminal vesicle", "epididymis", "vas deferens", "cervix", "clitoris", "bone marrow", "scrotum", "lacrimal gland|tear gland|lacrimal glands", "sigmoid colon", "vulva"],
   6: ["bulbourethral gland|cowpers gland|bulbourethral glands", "bartholins glands|bartholin gland|bartholins gland", "skenes glands|skene gland", "vermiform appendix", "islets of langerhans", "interstitium", "pancreatic duct", "sublingual gland", "parotid gland|parotid"] } },
 
-{ id: "c-constellation", pack: "Science & Tech", prompt: "Name one of the 88 constellations", answers: {
+{ classic: true, id: "c-constellation", pack: "Science & Tech", prompt: "Name one of the 88 constellations", answers: {
   1: ["orion", "ursa major|great bear", "cassiopeia"],
   2: ["leo", "scorpius|scorpio", "taurus", "gemini", "sagittarius", "aries", "virgo", "libra", "aquarius", "pisces", "capricornus|capricorn", "cancer", "ursa minor|little bear"],
   3: ["andromeda", "pegasus", "perseus", "draco", "cygnus", "lyra", "hercules", "centaurus", "crux|southern cross", "canis major", "ophiuchus", "aquila", "cepheus", "phoenix", "hydra"],
@@ -40,7 +40,7 @@ window.KRILL_DATA.push(
   5: ["camelopardalis", "lynx", "leo minor", "canes venatici", "coma berenices", "vulpecula", "lacerta", "equuleus", "crater", "dorado", "hydrus", "indus", "musca", "triangulum australe", "scutum"],
   6: ["antlia", "caelum", "circinus", "horologium", "mensa", "microscopium", "norma", "octans", "pictor", "pyxis", "reticulum", "sculptor", "sextans", "telescopium", "volans", "fornax", "apus", "chamaeleon"] } },
 
-{ id: "c-proglang", pack: "Science & Tech", prompt: "Name a programming language", answers: {
+{ classic: true, id: "c-proglang", pack: "Science & Tech", prompt: "Name a programming language", answers: {
   1: ["python", "java", "javascript|js", "c", "c plus plus|cpp|cplusplus"],
   2: ["c sharp|csharp", "ruby", "php", "swift", "sql", "go|golang", "rust", "typescript|ts", "kotlin", "r", "perl"],
   3: ["fortran", "cobol", "basic", "visual basic|vb|vbnet|vb net", "pascal", "lisp", "haskell", "scala", "matlab", "assembly|assembly language|asm", "lua", "dart", "objective c|objectivec|objc", "bash|shell", "powershell", "julia", "scratch"],
@@ -48,7 +48,7 @@ window.KRILL_DATA.push(
   5: ["forth", "rexx", "pl i|pli|pl1", "modula 2|modula2|modula", "oberon", "eiffel", "rpg", "snobol", "icon", "idris", "agda", "coq|rocq", "lean", "haxe", "vala", "hack", "rebol", "red", "chapel", "j", "k", "q", "factor", "purescript", "reasonml|reason", "gleam", "odin", "mojo", "raku|perl 6", "standard ml|sml", "miranda", "cython", "verilog", "vhdl", "postscript"],
   6: ["intercal", "brainfuck", "befunge", "malbolge", "whitespace", "piet", "lolcode", "shakespeare programming language", "chef", "unlambda", "bcpl", "b", "plankalkul", "jovial", "mumps", "cpl", "iswim", "sisal", "occam", "joy"] } },
 
-{ id: "c-carbrand", pack: "Science & Tech", prompt: "Name a car brand (past or present)", answers: {
+{ classic: true, id: "c-carbrand", pack: "Science & Tech", prompt: "Name a car brand (past or present)", answers: {
   1: ["toyota", "ford", "honda", "bmw", "chevrolet|chevy", "mercedes|mercedes benz|benz"],
   2: ["tesla", "audi", "volkswagen|vw", "nissan", "ferrari", "porsche", "jeep", "hyundai", "kia", "dodge", "lamborghini", "subaru", "mazda"],
   3: ["lexus", "cadillac", "jaguar", "land rover|range rover", "volvo", "buick", "gmc", "chrysler", "lincoln", "acura", "infiniti", "mitsubishi", "fiat", "mini", "bentley", "rolls royce", "maserati", "aston martin", "ram", "alfa romeo", "peugeot", "renault"],
@@ -56,7 +56,7 @@ window.KRILL_DATA.push(
   5: ["geely", "chery", "great wall", "nio", "xpeng", "li auto", "lancia", "cupra", "ds", "alpine", "morgan", "tvr", "rimac", "spyker", "de tomaso", "maybach", "studebaker", "packard", "desoto", "amc|american motors", "hudson", "nash", "proton", "perodua", "holden", "lada", "trabant", "hispano suiza", "vinfast", "ssangyong|kgm", "zastava|yugo", "triumph", "austin", "mg"],
   6: ["maruti suzuki|maruti", "hindustan", "moskvich", "tatra", "borgward", "facel vega", "auburn", "cord", "duesenberg", "tucker", "edsel", "kaiser", "hillman", "sunbeam", "riley", "wolseley", "talbot", "simca", "panhard", "hongqi", "wartburg", "pierce arrow", "stutz", "hupmobile", "graham paige", "willys"] } },
 
-{ id: "c-unit", pack: "Science & Tech", prompt: "Name a unit of measurement", answers: {
+{ classic: true, id: "c-unit", pack: "Science & Tech", prompt: "Name a unit of measurement", answers: {
   1: ["meter|metre", "inch", "foot|feet", "mile", "pound|lb", "kilogram|kilo|kg"],
   2: ["centimeter|centimetre|cm", "gram", "liter|litre", "ounce|oz", "yard", "kilometer|kilometre|km", "second", "minute", "hour", "gallon", "ton", "tonne|metric ton"],
   3: ["millimeter|millimetre|mm", "cup", "pint", "quart", "teaspoon", "tablespoon", "degree", "celsius|degree celsius|centigrade", "fahrenheit|degree fahrenheit", "kelvin", "watt", "volt", "ampere|amp", "acre", "hectare", "calorie", "joule", "newton", "milliliter|millilitre|ml", "stone", "miles per hour|mph", "knot", "byte", "bit", "kilobyte", "megabyte", "gigabyte", "terabyte", "day", "week", "year", "decade", "century"],
@@ -64,14 +64,14 @@ window.KRILL_DATA.push(
   5: ["rankine", "erg", "dyne", "gauss", "maxwell", "poise", "stokes", "torr", "barn", "dalton", "electronvolt|electron volt|ev", "curie", "roentgen", "rem", "rad", "katal", "jansky", "debye", "slug", "poundal", "ell", "span", "link", "rood", "minim", "scruple", "pennyweight", "firkin", "hogshead", "kilderkin", "tun", "millennium", "fortnight", "oersted", "denier", "tex"],
   6: ["shake", "jiffy", "smoot", "sverdrup", "mho", "statcoulomb", "abampere", "hartree", "rydberg", "planck length", "barye", "kip", "morgen", "verst|versta", "shaku", "tsubo", "picul", "tael", "catty|kati", "galileo|gal", "langley", "mickey", "sthene", "pieze", "stere", "oxgang", "bovate", "virgate"] } },
 
-{ id: "c-nobel-physics", pack: "Science & Tech", prompt: "Name a winner of the Nobel Prize in Physics", answers: {
+{ classic: true, id: "c-nobel-physics", pack: "Science & Tech", prompt: "Name a winner of the Nobel Prize in Physics", answers: {
   1: ["albert einstein|einstein", "marie curie|curie|madame curie", "niels bohr|bohr"],
   2: ["richard feynman|feynman", "max planck|planck", "enrico fermi|fermi", "werner heisenberg|heisenberg", "erwin schrodinger|schrodinger|schroedinger", "paul dirac|dirac", "pierre curie", "wilhelm rontgen|rontgen|roentgen|wilhelm roentgen"],
   3: ["peter higgs|higgs", "guglielmo marconi|marconi", "j j thomson|jj thomson|joseph john thomson", "ernest lawrence", "wolfgang pauli|pauli", "max born", "james chadwick|chadwick", "louis de broglie|de broglie", "arthur compton|compton", "murray gell mann|gell mann|gellmann", "john bardeen|bardeen", "william shockley|shockley", "c v raman|cv raman|raman", "hideki yukawa|yukawa", "roger penrose|penrose", "kip thorne|thorne", "henri becquerel|becquerel", "robert millikan|millikan", "steven weinberg|weinberg", "geoffrey hinton|hinton", "john hopfield|hopfield"],
   4: ["albert michelson|michelson", "hendrik lorentz|lorentz", "pieter zeeman|zeeman", "lord rayleigh|rayleigh|john william strutt", "philipp lenard|lenard", "wilhelm wien|wien", "gabriel lippmann|lippmann", "karl ferdinand braun|ferdinand braun", "johannes van der waals|van der waals", "heike kamerlingh onnes|kamerlingh onnes", "max von laue|von laue", "william henry bragg", "william lawrence bragg|lawrence bragg", "james franck", "gustav hertz", "otto stern", "isidor rabi|rabi", "felix bloch", "lev landau|landau", "chen ning yang|cn yang", "tsung dao lee|td lee", "emilio segre|segre", "rudolf mossbauer|mossbauer", "eugene wigner|wigner", "maria goeppert mayer|goeppert mayer", "hans bethe|bethe", "sheldon glashow|glashow", "abdus salam", "julian schwinger|schwinger", "sin itiro tomonaga|tomonaga", "brian josephson", "subrahmanyan chandrasekhar|chandrasekhar", "arno penzias|penzias", "charles townes|townes", "dennis gabor|gabor", "luis alvarez", "steven chu", "andre geim|geim", "konstantin novoselov|novoselov", "andrea ghez|ghez", "donna strickland", "anne lhuillier|anne l huillier", "saul perlmutter|perlmutter", "adam riess|riess", "brian schmidt", "rainer weiss", "barry barish|barish", "frank wilczek|wilczek", "carl anderson", "ernest walton", "john cockcroft", "c t r wilson|charles thomson rees wilson", "jean perrin", "victor hess", "clinton davisson|davisson", "george paget thomson", "pyotr kapitsa|kapitsa|peter kapitza", "francois englert|englert", "john clauser", "alain aspect", "anton zeilinger|zeilinger", "giorgio parisi|parisi"],
   5: ["gustaf dalen", "charles barkla", "johannes stark", "charles edouard guillaume", "manne siegbahn", "owen richardson", "percy bridgman|bridgman", "edward appleton", "patrick blackett|blackett", "cecil powell", "edward purcell", "frits zernike|zernike", "walther bothe", "willis lamb", "polykarp kusch", "walter brattain|brattain", "pavel cherenkov|cherenkov", "igor tamm", "ilya frank", "owen chamberlain", "donald glaser", "robert hofstadter", "j hans d jensen|hans jensen", "nikolay basov|basov", "alexander prokhorov|prokhorov", "alfred kastler", "hannes alfven|alfven", "louis neel", "leon cooper", "john robert schrieffer|schrieffer", "leo esaki|esaki", "ivar giaever|giaever", "martin ryle", "antony hewish|hewish", "aage bohr", "ben mottelson", "james rainwater", "burton richter", "samuel ting", "philip anderson|philip w anderson", "nevill mott", "john van vleck|van vleck", "robert woodrow wilson", "james cronin", "val fitch", "nicolaas bloembergen", "arthur schawlow|schawlow", "kai siegbahn", "kenneth wilson", "william fowler", "carlo rubbia|rubbia", "simon van der meer", "klaus von klitzing|von klitzing", "ernst ruska|ruska", "gerd binnig|binnig", "heinrich rohrer", "georg bednorz", "alex muller|k alex muller", "leon lederman|lederman", "melvin schwartz", "jack steinberger"],
   6: ["norman ramsey", "hans dehmelt", "wolfgang paul", "jerome friedman", "henry kendall", "richard taylor", "pierre gilles de gennes|de gennes", "georges charpak", "russell hulse", "joseph taylor", "bertram brockhouse", "clifford shull", "martin perl", "frederick reines", "david lee", "douglas osheroff", "robert richardson", "claude cohen tannoudji", "william phillips", "robert laughlin", "horst stormer", "daniel tsui", "gerard t hooft|t hooft|thooft", "martinus veltman", "zhores alferov", "herbert kroemer", "jack kilby|kilby", "eric cornell", "wolfgang ketterle", "carl wieman", "raymond davis", "masatoshi koshiba", "riccardo giacconi", "alexei abrikosov", "vitaly ginzburg", "anthony leggett", "david gross", "david politzer", "roy glauber", "john hall", "theodor hansch", "john mather", "george smoot", "albert fert", "peter grunberg", "yoichiro nambu|nambu", "makoto kobayashi", "toshihide maskawa", "charles kao", "willard boyle", "george smith", "serge haroche", "david wineland", "isamu akasaki", "hiroshi amano", "shuji nakamura", "takaaki kajita", "arthur mcdonald", "david thouless", "duncan haldane", "michael kosterlitz", "arthur ashkin", "gerard mourou", "james peebles|jim peebles", "michel mayor", "didier queloz", "reinhard genzel", "syukuro manabe|manabe", "klaus hasselmann", "pierre agostini", "ferenc krausz", "john clarke", "michel devoret", "john martinis"] } },
-{ id: "c-gemstone", pack: "Science & Tech", prompt: "Name a gemstone", answers: {
+{ classic: true, id: "c-gemstone", pack: "Science & Tech", prompt: "Name a gemstone", answers: {
   1: ["diamond", "ruby", "emerald", "sapphire"],
   2: ["amethyst", "pearl", "opal", "topaz", "jade", "garnet"],
   3: ["aquamarine", "turquoise", "onyx", "peridot", "citrine", "tourmaline", "quartz", "amber", "jasper", "lapis lazuli|lapis", "tanzanite", "moonstone", "zircon", "agate", "obsidian"],
@@ -79,7 +79,7 @@ window.KRILL_DATA.push(
   5: ["sphene|titanite", "andalusite", "kyanite", "chrysoberyl", "cats eye|cymophane", "ametrine", "prehnite", "sugilite", "charoite", "larimar", "ammolite", "howlite", "apatite", "diopside", "chrome diopside", "rhodolite", "spessartine|spessartite", "pyrope", "almandine|almandite", "demantoid", "hiddenite", "danburite", "sillimanite", "rhodonite", "chrysocolla", "unakite", "variscite", "spodumene", "scapolite", "zoisite", "anyolite|ruby in zoisite", "thulite", "goshenite", "tektite", "moldavite"],
   6: ["painite", "taaffeite", "grandidierite", "jeremejevite", "musgravite", "poudretteite", "serendibite", "benitoite", "red beryl|bixbite", "euclase", "phenakite|phenacite", "hambergite", "kornerupine", "sinhalite", "pezzottaite", "ekanite", "tugtupite", "hauyne|hauynite", "diaspore|zultanite|csarite", "axinite", "enstatite", "clinohumite", "sapphirine", "vesuvianite|idocrase", "dumortierite", "hackmanite"] } },
 
-{ id: "c-polygon", pack: "Science & Tech", prompt: "Name a polygon", answers: {
+{ classic: true, id: "c-polygon", pack: "Science & Tech", prompt: "Name a polygon", answers: {
   1: ["triangle", "square", "rectangle", "pentagon", "hexagon"],
   2: ["octagon", "rhombus|rhomb|diamond|lozenge", "trapezoid|trapezium", "parallelogram", "heptagon|septagon", "quadrilateral|quadrangle|tetragon"],
   3: ["decagon", "nonagon|enneagon", "dodecagon", "kite|deltoid", "isosceles triangle", "equilateral triangle", "right triangle|right angled triangle|right angle triangle", "scalene triangle", "pentagram"],
@@ -87,7 +87,7 @@ window.KRILL_DATA.push(
   5: ["tridecagon|triskaidecagon", "tetradecagon|tetrakaidecagon", "pentadecagon|pentakaidecagon", "hexadecagon|hexakaidecagon", "heptadecagon|heptakaidecagon", "octadecagon|octakaidecagon", "enneadecagon|enneakaidecagon|nonadecagon", "hectogon|hectagon", "chiliagon", "dart|arrowhead|chevron", "decagram", "heptagram", "octagram", "enneagram", "triacontagon", "tangential quadrilateral", "cyclic quadrilateral"],
   6: ["myriagon", "megagon", "googolgon", "apeirogon", "tetracontagon", "pentacontagon", "hexacontagon", "heptacontagon", "octacontagon", "enneacontagon", "icositetragon", "dodecagram", "orthodiagonal quadrilateral", "antiparallelogram", "skew polygon"] } },
 
-{ id: "c-metric-prefix", pack: "Science & Tech", prompt: "Name a metric (SI) prefix", answers: {
+{ classic: true, id: "c-metric-prefix", pack: "Science & Tech", prompt: "Name a metric (SI) prefix", answers: {
   1: ["kilo", "centi", "milli", "mega"],
   2: ["giga", "micro", "nano", "tera"],
   3: ["deci", "pico", "hecto", "peta"],
@@ -95,7 +95,7 @@ window.KRILL_DATA.push(
   5: ["zetta", "yotta", "zepto", "yocto"],
   6: ["ronna", "quetta", "ronto", "quecto"] } },
 
-{ id: "c-console", pack: "Science & Tech", prompt: "Name a video game console", answers: {
+{ classic: true, id: "c-console", pack: "Science & Tech", prompt: "Name a video game console", answers: {
   1: ["playstation|ps1|psx|playstation 1|ps one|psone", "xbox", "nintendo switch|switch", "wii|nintendo wii", "playstation 2|ps2", "nes|nintendo entertainment system|famicom"],
   2: ["playstation 3|ps3", "playstation 4|ps4", "playstation 5|ps5", "xbox 360", "xbox one", "nintendo 64|n64", "game boy|gameboy", "super nintendo|snes|super nes|super famicom", "gamecube|nintendo gamecube", "nintendo ds|ds", "wii u", "sega genesis|genesis|mega drive|sega mega drive", "atari 2600|atari|atari vcs"],
   3: ["xbox series x", "xbox series s", "nintendo 3ds|3ds", "psp|playstation portable", "ps vita|playstation vita|vita", "game boy advance|gba", "game boy color|gbc", "sega dreamcast|dreamcast", "sega saturn|saturn", "game gear|sega game gear", "master system|sega master system", "steam deck", "nintendo switch 2|switch 2", "virtual boy"],
@@ -103,7 +103,7 @@ window.KRILL_DATA.push(
   5: ["vectrex", "fairchild channel f|channel f", "bally astrocade|astrocade", "atari xegs", "amiga cd32|cd32", "philips cd i|cd i|cdi", "apple pippin|pippin", "pc fx", "nuon", "gizmondo", "tiger game com|game com", "sega pico", "playdia", "gp32", "sg 1000|sega sg 1000", "magnavox odyssey 2|odyssey 2|videopac", "playdate", "evercade", "nintendo 64dd|64dd", "pokemon mini", "game boy pocket", "neo geo cd", "xbox series"],
   6: ["casio pv 1000|pv 1000", "epoch cassette vision|cassette vision", "emerson arcadia 2001|arcadia 2001", "apf mp1000", "rca studio ii|studio ii", "coleco telstar|telstar", "watara supervision|supervision", "tapwave zodiac", "satellaview", "atari panther", "fm towns marty", "super a can", "vtech socrates", "koei pasocom"] } },
 
-{ id: "c-particle", pack: "Science & Tech", prompt: "Name a subatomic particle", answers: {
+{ classic: true, id: "c-particle", pack: "Science & Tech", prompt: "Name a subatomic particle", answers: {
   1: ["electron", "proton", "neutron"],
   2: ["photon", "quark", "neutrino", "positron|antielectron", "higgs boson|higgs|god particle"],
   3: ["gluon", "muon", "up quark", "down quark", "w boson", "z boson", "pion|pi meson", "alpha particle", "antiproton", "antineutron", "tau|tauon|tau lepton", "boson", "beta particle"],
@@ -111,14 +111,14 @@ window.KRILL_DATA.push(
   5: ["pentaquark", "tetraquark", "b meson", "d meson", "phi meson", "omega meson", "delta baryon", "triton", "helion", "nucleon", "gauge boson", "antitau", "eta prime meson", "charmonium", "bottomonium"],
   6: ["x 3872|x3872", "sigma meson", "chi c meson|chi c", "f0 meson", "zc 3900|zc3900", "dibaryon", "hypertriton", "omega c baryon", "xi cc baryon"] } },
 
-{ id: "c-muscle", pack: "Science & Tech", prompt: "Name a muscle in the human body", answers: {
+{ classic: true, id: "c-muscle", pack: "Science & Tech", prompt: "Name a muscle in the human body", answers: {
   1: ["biceps|bicep|biceps brachii", "triceps|tricep|triceps brachii", "abs|abdominals|rectus abdominis|six pack", "glutes|glute|gluteus maximus", "quadriceps|quads|quad|quadricep", "hamstrings|hamstring"],
   2: ["deltoid|deltoids|delts|delt", "pectorals|pecs|pec|pectoralis major", "gastrocnemius|calf|calves", "trapezius|traps|trap", "latissimus dorsi|lats|lat", "diaphragm", "obliques|external oblique|internal oblique|oblique"],
   3: ["soleus", "sartorius", "rhomboids|rhomboid|rhomboid major|rhomboid minor", "masseter", "tibialis anterior", "sternocleidomastoid", "gluteus medius", "gluteus minimus", "serratus anterior", "pectoralis minor", "rectus femoris", "vastus lateralis", "vastus medialis", "erector spinae", "psoas|psoas major|iliopsoas", "brachioradialis", "brachialis", "intercostals|intercostal|intercostal muscles", "temporalis", "rotator cuff"],
   4: ["infraspinatus", "supraspinatus", "subscapularis", "teres major", "teres minor", "levator scapulae", "piriformis", "iliacus", "tensor fasciae latae|tensor fascia latae|tfl", "adductor longus", "adductor magnus", "adductor brevis", "gracilis", "pectineus", "vastus intermedius", "biceps femoris", "semitendinosus", "semimembranosus", "transversus abdominis|transverse abdominis", "quadratus lumborum", "frontalis", "orbicularis oculi", "orbicularis oris", "zygomaticus major|zygomaticus", "buccinator", "platysma", "coracobrachialis", "pronator teres", "supinator", "flexor carpi radialis", "flexor carpi ulnaris", "extensor carpi radialis longus", "palmaris longus", "peroneus longus|fibularis longus", "popliteus", "plantaris", "splenius capitis", "scalenes|scalene|anterior scalene", "multifidus", "levator ani", "pelvic floor"],
   5: ["anconeus", "medial pterygoid", "lateral pterygoid", "mentalis", "corrugator supercilii", "nasalis", "risorius", "depressor anguli oris", "levator labii superioris", "occipitalis", "flexor digitorum profundus", "flexor digitorum superficialis", "extensor digitorum", "flexor pollicis longus", "abductor pollicis brevis", "opponens pollicis", "adductor pollicis", "lumbricals|lumbrical", "interossei|dorsal interossei|palmar interossei", "tibialis posterior", "extensor hallucis longus", "flexor hallucis longus", "peroneus brevis|fibularis brevis", "obturator internus", "obturator externus", "superior rectus", "inferior rectus", "lateral rectus", "medial rectus", "superior oblique", "inferior oblique", "levator palpebrae superioris", "digastric", "mylohyoid", "genioglossus", "detrusor"],
   6: ["stapedius", "tensor tympani", "cremaster", "procerus", "gemellus superior", "gemellus inferior", "quadratus femoris", "subclavius", "palmaris brevis", "abductor digiti minimi", "opponens digiti minimi", "quadratus plantae", "articularis genus", "cricothyroid", "thyroarytenoid", "posterior cricoarytenoid", "geniohyoid", "stylohyoid", "omohyoid", "sternohyoid", "sternothyroid", "thyrohyoid", "palatoglossus", "hyoglossus", "styloglossus", "auricularis anterior", "arrector pili", "dartos", "ischiocavernosus", "bulbospongiosus", "levator veli palatini", "tensor veli palatini", "musculus uvulae|uvular muscle"] } },
-{ id: "c-us-president", pack: "History & People", prompt: "Name a US president", answers: {
+{ classic: true, id: "c-us-president", pack: "History & People", prompt: "Name a US president", answers: {
   1: ["george washington|washington", "abraham lincoln|lincoln|abe lincoln", "donald trump|trump", "barack obama|obama", "joe biden|biden", "john f kennedy|jfk|kennedy|john kennedy"],
   2: ["thomas jefferson|jefferson", "franklin d roosevelt|fdr|franklin roosevelt|roosevelt", "theodore roosevelt|teddy roosevelt|teddy", "ronald reagan|reagan", "bill clinton|clinton", "george w bush|george bush|bush|dubya|w bush", "richard nixon|nixon", "jimmy carter|carter"],
   3: ["john adams|adams", "george h w bush|george hw bush|bush senior|ghw bush", "harry truman|truman|harry s truman", "dwight eisenhower|eisenhower|ike|dwight d eisenhower", "andrew jackson|jackson", "ulysses s grant|grant|ulysses grant", "james madison|madison", "lyndon b johnson|lbj|lyndon johnson|johnson", "gerald ford|ford", "woodrow wilson|wilson", "james monroe|monroe"],
@@ -126,7 +126,7 @@ window.KRILL_DATA.push(
   5: ["rutherford b hayes|hayes|rutherford hayes", "james garfield|garfield|james a garfield", "benjamin harrison", "millard fillmore|fillmore"],
   6: ["chester a arthur|chester arthur|arthur", "franklin pierce|pierce", "james buchanan|buchanan"] } },
 
-{ id: "c-roman-emperor", pack: "History & People", prompt: "Name a Roman emperor", answers: {
+{ classic: true, id: "c-roman-emperor", pack: "History & People", prompt: "Name a Roman emperor", answers: {
   1: ["augustus|octavian|caesar augustus|octavius", "nero", "caligula", "marcus aurelius"],
   2: ["constantine|constantine the great|constantine i", "hadrian", "tiberius", "claudius", "commodus", "trajan"],
   3: ["diocletian", "vespasian", "titus", "domitian", "caracalla", "septimius severus", "justinian|justinian i|justinian the great", "theodosius|theodosius i|theodosius the great", "romulus augustulus", "antoninus pius", "galba", "otho", "vitellius", "nerva"],
@@ -134,7 +134,7 @@ window.KRILL_DATA.push(
   5: ["pupienus", "balbinus", "trebonianus gallus", "aemilian|aemilianus", "quintillus", "tacitus", "florian|florianus", "carinus", "numerian", "constans", "constantine ii", "valentinian ii", "theodosius ii", "valentinian iii", "petronius maximus", "avitus", "majorian", "maxentius", "maximinus daia|maximinus ii", "marcian", "leo i", "zeno", "anastasius i", "justin i", "justin ii", "heraclius", "basil ii", "alexios i komnenos|alexius i comnenus"],
   6: ["libius severus", "anthemius", "olybrius", "glycerius", "julius nepos", "severus ii", "hostilian", "herennius etruscus", "volusianus|volusian", "tiberius ii constantine|tiberius ii", "maurice", "phocas", "constantine xi|constantine xi palaiologos", "philip ii", "vetranio"] } },
 
-{ id: "c-greek-god", pack: "History & People", prompt: "Name a Greek god or goddess", answers: {
+{ classic: true, id: "c-greek-god", pack: "History & People", prompt: "Name a Greek god or goddess", answers: {
   1: ["zeus", "poseidon", "hades", "athena|athene|pallas athena", "apollo", "aphrodite", "ares"],
   2: ["hermes", "hera", "artemis", "dionysus|dionysos", "hephaestus|hephaistos", "demeter", "persephone|kore", "kronos|cronus|cronos", "gaia|gaea|ge", "eros"],
   3: ["hestia", "nike", "pan", "uranus|ouranos", "rhea", "hecate|hekate", "helios", "selene", "eos", "nemesis", "nyx", "atlas", "prometheus", "hypnos", "thanatos", "tyche", "morpheus", "iris", "hebe", "chaos", "tartarus", "themis", "triton"],
@@ -142,7 +142,7 @@ window.KRILL_DATA.push(
   5: ["calliope", "clio", "erato", "euterpe", "melpomene", "polyhymnia", "terpsichore", "thalia", "urania", "coeus", "crius", "iapetus", "phoebe", "theia", "menoetius", "astraeus", "pallas", "perses", "styx", "hesperus", "phosphorus|eosphorus", "bia", "kratos|cratos", "zelus", "pheme", "panacea", "despoina", "leucothea", "glaucus", "aristaeus"],
   6: ["oizys", "geras", "apate", "momus", "philotes", "aceso", "iaso", "phorcys", "ceto", "thaumas", "eurybia", "palaemon", "achelous", "alpheus", "ponos", "lethe", "dolos", "eupheme", "aergia", "hesychia", "elpis", "eunomia", "dike", "eirene", "eleos", "homados", "kakia", "soter", "telesphorus", "harpocrates", "achlys"] } },
 
-{ id: "c-norse-god", pack: "History & People", prompt: "Name a Norse god or goddess", answers: {
+{ classic: true, id: "c-norse-god", pack: "History & People", prompt: "Name a Norse god or goddess", answers: {
   1: ["odin|woden|wotan|odinn", "thor", "loki", "freya|freyja"],
   2: ["frigg|frigga", "baldur|balder|baldr", "tyr|tiw", "heimdall|heimdallr", "hel|hela", "freyr|frey|yngvi"],
   3: ["njord|njordr|njorth", "idun|idunn|iduna", "bragi", "sif", "vidar|vidarr|vithar", "vali", "hodr|hod|hoder|hodur|hoth", "forseti", "ullr|ull|uller", "skadi", "aegir", "ran", "mimir|mimr", "jord|jorth|fjorgyn"],
@@ -150,7 +150,7 @@ window.KRILL_DATA.push(
   5: ["thrud|thrudr", "hermod|hermodr", "var", "vor", "syn", "hlin", "snotra", "lofn", "sjofn", "fulla", "gna", "delling"],
   6: ["meili", "hnoss", "gersemi", "lodurr|lodur", "rindr|rind", "gerd|gerdr", "skirnir", "beyla", "byggvir", "baduhenna", "nehalennia", "tanfana"] } },
 
-{ id: "c-british-monarch", pack: "History & People", prompt: "Name an English or British monarch", answers: {
+{ classic: true, id: "c-british-monarch", pack: "History & People", prompt: "Name an English or British monarch", answers: {
   1: ["elizabeth ii|queen elizabeth ii|elizabeth 2|elizabeth the second|queen elizabeth|elizabeth", "henry viii|henry 8|henry the eighth|henry eighth", "victoria|queen victoria", "charles iii|charles 3|king charles|charles"],
   2: ["elizabeth i|elizabeth 1|queen elizabeth i|elizabeth the first", "george iii|george 3", "william the conqueror|william i|william 1", "richard iii|richard 3", "james i|james 1", "charles i|charles 1", "mary i|mary 1|bloody mary", "edward viii|edward 8", "george vi|george 6", "king john|john|john lackland", "richard i|richard the lionheart|richard the lionhearted|richard 1", "alfred the great|alfred"],
   3: ["henry v|henry 5", "henry vii|henry 7", "edward vi|edward 6", "mary ii|mary 2", "william iii|william of orange|william 3", "anne|queen anne", "george v|george 5", "edward vii|edward 7", "george i|george 1", "george ii|george 2", "george iv|george 4", "william iv|william 4", "charles ii|charles 2", "james ii|james 2", "edward i|edward 1|longshanks", "edward iii|edward 3", "richard ii|richard 2", "henry iv|henry 4", "henry vi|henry 6", "lady jane grey|jane grey|jane", "canute|cnut|knut|canute the great", "harold ii|harold godwinson|harold 2", "edward the confessor"],
@@ -158,14 +158,14 @@ window.KRILL_DATA.push(
   5: ["matilda|empress matilda", "edgar the peaceful|edgar", "edmund ironside|edmund ii", "harold harefoot|harold i", "harthacnut|hardicanute", "sweyn forkbeard|sweyn", "edward the martyr", "edmund i|edmund the magnificent"],
   6: ["eadred", "eadwig|edwy", "edgar atheling|edgar aetheling", "edward the elder"] } },
 
-{ id: "c-egyptian-god", pack: "History & People", prompt: "Name an ancient Egyptian god or goddess", answers: {
+{ classic: true, id: "c-egyptian-god", pack: "History & People", prompt: "Name an ancient Egyptian god or goddess", answers: {
   1: ["ra|re", "anubis", "osiris", "isis", "horus"],
   2: ["set|seth", "thoth", "bastet|bast", "amun|amon|amen", "sobek", "hathor"],
   3: ["ptah", "maat|maet", "nut", "geb", "shu", "tefnut", "nephthys", "sekhmet", "khnum", "aten", "atum", "bes", "taweret|tauret", "khonsu", "apep|apophis", "amun ra|amunra|amon ra", "hapi|hapy", "montu", "min"],
   4: ["neith", "serket|selket|serqet", "wadjet|uto", "nekhbet", "mut", "heka", "nefertem", "khepri", "wepwawet", "sopdet|sothis", "satis|satet", "anuket", "renenutet", "meretseger", "imhotep", "seshat", "aker", "ra horakhty|re horakhty", "ihy"],
   5: ["hu", "sia", "babi", "nehebkau", "mafdet", "pakhet", "menhit", "hatmehit", "kebechet", "imsety", "duamutef", "qebehsenuef", "anhur|onuris", "andjety", "sokar|seker", "tatenen", "heh", "kek|kuk", "nun", "naunet", "amaunet"],
   6: ["hauhet", "kauket", "wosret", "werethekau", "shezmu|shesmu", "tayet", "mehen", "mehet weret|mehturt", "unut", "iusaaset", "bat", "sopdu", "dedun", "khenti amentiu", "hemsut", "raet", "aken", "bennu"] } },
-{ id: "c-painter", pack: "History & People", prompt: "Name a famous painter", answers: {
+{ classic: true, id: "c-painter", pack: "History & People", prompt: "Name a famous painter", answers: {
   1: ["leonardo da vinci|da vinci|leonardo", "vincent van gogh|van gogh", "pablo picasso|picasso", "michelangelo|michelangelo buonarroti", "claude monet|monet"],
   2: ["salvador dali|dali", "rembrandt|rembrandt van rijn", "andy warhol|warhol", "frida kahlo|kahlo|frida", "raphael", "jackson pollock|pollock", "georgia okeeffe|okeeffe|o keeffe|georgia o keeffe", "bob ross"],
   3: ["edgar degas|degas", "pierre auguste renoir|renoir|auguste renoir", "paul cezanne|cezanne", "henri matisse|matisse", "johannes vermeer|vermeer|jan vermeer", "edvard munch|munch|edward munch", "gustav klimt|klimt", "rene magritte|magritte", "francisco goya|goya", "caravaggio", "sandro botticelli|botticelli", "paul gauguin|gauguin", "edward hopper|hopper", "norman rockwell|rockwell", "diego rivera|rivera", "wassily kandinsky|kandinsky", "piet mondrian|mondrian", "roy lichtenstein|lichtenstein", "edouard manet|manet", "jan van eyck|van eyck", "hieronymus bosch|bosch", "titian", "el greco", "diego velazquez|velazquez", "peter paul rubens|rubens", "jmw turner|j m w turner|turner|william turner", "john constable|constable", "georges seurat|seurat", "mark rothko|rothko", "james mcneill whistler|whistler|james whistler", "grant wood", "keith haring|haring", "jean michel basquiat|basquiat"],
@@ -173,7 +173,7 @@ window.KRILL_DATA.push(
   5: ["giorgione", "andrea mantegna|mantegna", "masaccio", "duccio", "cimabue", "perugino", "rogier van der weyden", "hans memling|memling", "lucas cranach|cranach", "el lissitzky", "franz marc", "emil nolde", "ernst ludwig kirchner|kirchner", "max ernst", "yves tanguy", "giorgio de chirico|de chirico", "tamara de lempicka|lempicka", "utagawa hiroshige|hiroshige", "thomas cole", "albert bierstadt|bierstadt", "frederic edwin church", "john william waterhouse|waterhouse", "dante gabriel rossetti|rossetti", "john everett millais|millais", "edward burne jones|burne jones", "jean antoine watteau|watteau", "francois boucher|boucher", "jean honore fragonard|fragonard", "nicolas poussin|poussin", "claude lorrain", "george stubbs", "paul signac|signac", "pierre bonnard|bonnard", "odilon redon", "gustave moreau", "ilya repin|repin", "ivan aivazovsky|aivazovsky", "jose clemente orozco|orozco", "david alfaro siqueiros|siqueiros", "helen frankenthaler", "cy twombly", "barnett newman", "lee krasner", "joan mitchell", "robert motherwell", "hilma af klint"],
   6: ["edouard vuillard|vuillard", "arnold bocklin|bocklin", "wifredo lam", "rufino tamayo", "clyfford still", "franz kline", "agnes martin", "kerry james marshall", "sofonisba anguissola", "judith leyster", "rachel ruysch", "elisabeth vigee le brun|vigee le brun", "angelica kauffman", "rosa bonheur", "carel fabritius", "pieter de hooch", "gerard ter borch", "adriaen brouwer", "jacob van ruisdael|ruisdael", "meindert hobbema", "arshile gorky", "chaim soutine", "kathe kollwitz", "paula modersohn becker", "suzanne valadon", "gwen john", "leonora carrington", "remedios varo", "maria sibylla merian", "ogata korin", "sesshu", "fan kuan", "raja ravi varma", "amrita sher gil"] } },
 
-{ id: "c-shakespeare-play", pack: "History & People", prompt: "Name a play by William Shakespeare", answers: {
+{ classic: true, id: "c-shakespeare-play", pack: "History & People", prompt: "Name a play by William Shakespeare", answers: {
   1: ["romeo and juliet|romeo juliet", "hamlet", "macbeth"],
   2: ["othello", "king lear|lear", "a midsummer nights dream|midsummer nights dream|midsummer night dream", "julius caesar", "tempest", "much ado about nothing"],
   3: ["merchant of venice", "twelfth night", "taming of the shrew", "as you like it", "richard iii|richard 3", "antony and cleopatra", "henry v|henry 5"],
@@ -181,7 +181,7 @@ window.KRILL_DATA.push(
   5: ["cymbeline", "pericles|pericles prince of tyre", "timon of athens", "two gentlemen of verona", "henry vi part 1|henry vi|henry 6|henry vi part one", "henry vi part 2|henry vi part two", "henry vi part 3|henry vi part three", "henry viii|henry 8|all is true"],
   6: ["two noble kinsmen", "edward iii|edward 3", "sir thomas more"] } },
 
-{ id: "c-composer", pack: "History & People", prompt: "Name a classical composer", answers: {
+{ classic: true, id: "c-composer", pack: "History & People", prompt: "Name a classical composer", answers: {
   1: ["wolfgang amadeus mozart|mozart", "ludwig van beethoven|beethoven", "johann sebastian bach|bach|js bach"],
   2: ["frederic chopin|chopin", "pyotr ilyich tchaikovsky|tchaikovsky|tchaikovski", "antonio vivaldi|vivaldi", "george frideric handel|handel", "joseph haydn|haydn", "johannes brahms|brahms", "claude debussy|debussy"],
   3: ["franz schubert|schubert", "richard wagner|wagner", "giuseppe verdi|verdi", "giacomo puccini|puccini", "franz liszt|liszt", "felix mendelssohn|mendelssohn", "robert schumann|schumann", "johann strauss|strauss|johann strauss ii", "igor stravinsky|stravinsky", "sergei rachmaninoff|rachmaninoff|rachmaninov", "antonin dvorak|dvorak", "gustav mahler|mahler", "maurice ravel|ravel", "edvard grieg|grieg", "johann pachelbel|pachelbel", "gustav holst|holst", "gioachino rossini|rossini", "erik satie|satie"],
@@ -189,7 +189,7 @@ window.KRILL_DATA.push(
   5: ["alban berg", "anton webern|webern", "paul hindemith|hindemith", "leos janacek|janacek", "bedrich smetana|smetana", "mikhail glinka|glinka", "alexander scriabin|scriabin", "giovanni pierluigi da palestrina|palestrina", "josquin des prez|josquin", "hildegard of bingen|hildegard von bingen", "jean baptiste lully|lully", "jean philippe rameau|rameau", "francois couperin|couperin", "arcangelo corelli|corelli", "tomaso albinoni|albinoni", "thomas tallis|tallis", "william byrd|byrd", "john dowland|dowland", "carl philipp emanuel bach|cpe bach|c p e bach", "muzio clementi|clementi", "carl czerny|czerny", "johann nepomuk hummel|hummel", "carl maria von weber|weber", "jules massenet|massenet", "leo delibes|delibes", "charles gounod|gounod", "cesar franck|franck", "francis poulenc|poulenc", "darius milhaud|milhaud", "olivier messiaen|messiaen", "gyorgy ligeti|ligeti", "krzysztof penderecki|penderecki", "arvo part", "henryk gorecki|gorecki", "steve reich", "john adams", "john cage|cage", "charles ives|ives", "heitor villa lobos|villa lobos", "manuel de falla|de falla", "isaac albeniz|albeniz", "joaquin rodrigo|rodrigo", "ottorino respighi|respighi", "pietro mascagni|mascagni", "ruggero leoncavallo|leoncavallo", "luigi boccherini|boccherini", "clara schumann", "fanny mendelssohn|fanny hensel", "dieterich buxtehude|buxtehude", "giovanni battista pergolesi|pergolesi"],
   6: ["carlo gesualdo|gesualdo", "johannes ockeghem|ockeghem", "perotin", "leonin", "guillaume de machaut|machaut", "guillaume dufay|dufay", "heinrich biber|biber", "jan dismas zelenka|zelenka", "johann stamitz|stamitz", "carl ditters von dittersdorf|dittersdorf", "louis moreau gottschalk|gottschalk", "charles valentin alkan|alkan", "nikolai medtner|medtner", "kaikhosru sorabji|sorabji", "conlon nancarrow|nancarrow", "iannis xenakis|xenakis", "karlheinz stockhausen|stockhausen", "pierre boulez|boulez", "edgard varese|varese", "toru takemitsu|takemitsu", "kaija saariaho|saariaho", "lili boulanger", "nadia boulanger", "amy beach", "florence price", "joseph bologne|chevalier de saint georges", "ernest chausson|chausson", "arthur honegger|honegger", "enrique granados|granados", "heinrich schutz|schutz", "johann joseph fux|fux", "michael praetorius|praetorius", "barbara strozzi|strozzi", "francesca caccini"] } },
 
-{ id: "c-philosopher", pack: "History & People", prompt: "Name a philosopher", answers: {
+{ classic: true, id: "c-philosopher", pack: "History & People", prompt: "Name a philosopher", answers: {
   1: ["socrates", "plato", "aristotle", "confucius", "friedrich nietzsche|nietzsche"],
   2: ["rene descartes|descartes", "immanuel kant|kant", "karl marx|marx", "john locke|locke", "niccolo machiavelli|machiavelli", "jean paul sartre|sartre", "thomas hobbes|hobbes"],
   3: ["david hume|hume", "jean jacques rousseau|rousseau", "voltaire", "soren kierkegaard|kierkegaard", "georg wilhelm friedrich hegel|hegel", "baruch spinoza|spinoza", "john stuart mill|mill|js mill", "bertrand russell|russell", "ludwig wittgenstein|wittgenstein", "simone de beauvoir|de beauvoir|beauvoir", "albert camus|camus", "lao tzu|laozi|lao tse", "pythagoras", "diogenes", "epicurus", "seneca", "marcus aurelius", "thomas aquinas|aquinas|saint thomas aquinas", "augustine|saint augustine|augustine of hippo", "arthur schopenhauer|schopenhauer", "martin heidegger|heidegger", "francis bacon"],
@@ -197,14 +197,14 @@ window.KRILL_DATA.push(
   5: ["anaximenes", "xunzi", "mozi", "han feizi", "nagarjuna", "adi shankara|shankara", "ramanuja", "dogen", "al ghazali", "al farabi", "ibn khaldun", "duns scotus", "giordano bruno", "pierre gassendi", "nicolas malebranche|malebranche", "hugo grotius|grotius", "giambattista vico|vico", "johann gottfried herder|herder", "johann gottlieb fichte|fichte", "friedrich schelling|schelling", "ludwig feuerbach|feuerbach", "auguste comte|comte", "herbert spencer", "charles sanders peirce|peirce", "gottlob frege|frege", "henri bergson|bergson", "alfred north whitehead|whitehead", "edmund husserl|husserl", "maurice merleau ponty|merleau ponty", "emmanuel levinas|levinas", "hans georg gadamer|gadamer", "jurgen habermas|habermas", "theodor adorno|adorno", "max horkheimer|horkheimer", "herbert marcuse|marcuse", "walter benjamin", "antonio gramsci|gramsci", "willard van orman quine|quine", "saul kripke|kripke", "richard rorty|rorty", "robert nozick|nozick", "martha nussbaum|nussbaum", "judith butler", "alasdair macintyre", "g e moore|ge moore", "a j ayer|aj ayer", "gilbert ryle", "j l austin|jl austin", "elizabeth anscombe|anscombe", "philippa foot", "iris murdoch", "hilary putnam|putnam", "daniel dennett|dennett", "thomas nagel", "hypatia"],
   6: ["xenophanes", "gorgias", "antisthenes", "chrysippus", "cleanthes", "pyrrho", "sextus empiricus", "porphyry", "proclus", "iamblichus", "john scotus eriugena|eriugena", "peter abelard|abelard", "roger bacon", "nicholas of cusa", "pico della mirandola", "francisco suarez", "thomas reid", "moses mendelssohn", "christian wolff", "max stirner|stirner", "peter kropotkin|kropotkin", "mikhail bakunin|bakunin", "pierre joseph proudhon|proudhon", "henry sidgwick|sidgwick", "f h bradley", "j m e mctaggart|mctaggart", "alexius meinong|meinong", "franz brentano|brentano", "wilhelm dilthey|dilthey", "ernst cassirer|cassirer", "rudolf carnap|carnap", "moritz schlick|schlick", "otto neurath|neurath", "donald davidson", "david lewis", "ramon llull", "wang yangming", "zhu xi", "ibn arabi", "suhrawardi", "mulla sadra", "madhva", "dharmakirti", "vasubandhu"] } },
 
-{ id: "c-pharaoh", pack: "History & People", prompt: "Name an ancient Egyptian pharaoh", answers: {
+{ classic: true, id: "c-pharaoh", pack: "History & People", prompt: "Name an ancient Egyptian pharaoh", answers: {
   1: ["tutankhamun|tutankhamen|king tut|tut", "ramesses ii|ramses ii|ramses|ramesses|ramses the great|ramesses the great", "cleopatra|cleopatra vii"],
   2: ["khufu|cheops", "akhenaten|akhenaton|amenhotep iv", "hatshepsut", "thutmose iii|thutmose|tuthmosis iii|thutmosis iii", "khafre|chephren|khafra", "menkaure|mycerinus", "djoser|zoser"],
   3: ["narmer|menes", "amenhotep iii", "seti i|sety i|seti", "ramesses iii|ramses iii", "sneferu|snefru", "ptolemy i soter|ptolemy i|ptolemy", "horemheb", "ay", "alexander the great", "thutmose i|tuthmosis i", "amenhotep i", "ahmose i|ahmose"],
   4: ["thutmose ii|tuthmosis ii", "thutmose iv|tuthmosis iv", "amenhotep ii", "smenkhkare", "merneptah", "mentuhotep ii", "senusret i|sesostris i", "senusret iii|sesostris iii", "amenemhat i|amenemhet i", "amenemhat iii|amenemhet iii", "unas", "pepi ii", "pepi i", "djedefre|radjedef", "taharqa", "piye|piankhi", "psamtik i|psammetichus i", "necho ii", "nectanebo ii", "ptolemy ii philadelphus|ptolemy ii", "caesarion|ptolemy xv", "ptolemy xiii", "sobekneferu|sobekneferure|neferusobek", "kamose", "seti ii"],
   5: ["teti", "userkaf", "sahure", "neferirkare", "shepseskaf", "hor aha|aha", "djer", "den", "khasekhemwy", "sekhemkhet", "huni", "shabaka|shabako", "apries", "amasis ii|ahmose ii", "nectanebo i", "ptolemy iii euergetes|ptolemy iii", "ptolemy v epiphanes|ptolemy v", "ptolemy xii auletes|ptolemy xii", "twosret|tausret", "ramesses vi", "ramesses ix", "ramesses xi", "psusennes i", "shoshenq i|sheshonq i|shishak", "seqenenre tao", "khyan", "apepi", "mentuhotep iii", "senusret ii", "amenemhat ii"],
   6: ["siamun", "osorkon ii", "intef ii", "nyuserre ini|nyuserre", "menkauhor kaiu", "djedkare isesi|isesi", "merenre i|merenre", "neferefre|raneferef", "qaa", "anedjib", "semerkhet", "djet", "peribsen", "nynetjer", "hotepsekhemwy", "raneb|nebra", "khaba", "sanakht", "ptolemy iv philopator|ptolemy iv", "ptolemy vi philometor", "ptolemy viii physcon", "berenice iv", "tefnakht", "bakenranef|bocchoris", "amyrtaeus", "psamtik iii", "nepherites i", "hakor|achoris", "tanutamun", "shebitku", "smendes", "sobekhotep iv", "neferhotep i"] } },
-{ id: "c-first-lady", pack: "History & People", prompt: "Name a US First Lady", answers: {
+{ classic: true, id: "c-first-lady", pack: "History & People", prompt: "Name a US First Lady", answers: {
   1: ["michelle obama", "jacqueline kennedy|jackie kennedy|jackie o|jacqueline kennedy onassis|jackie onassis|jackie", "eleanor roosevelt", "melania trump|melania", "hillary clinton|hillary rodham clinton|hillary", "martha washington"],
   2: ["laura bush", "nancy reagan", "jill biden", "barbara bush", "abigail adams", "dolley madison|dolly madison|dolley", "mary todd lincoln|mary lincoln"],
   3: ["betty ford", "rosalynn carter", "lady bird johnson|lady bird|claudia johnson", "pat nixon", "bess truman", "mamie eisenhower|mamie", "edith roosevelt", "edith wilson", "grace coolidge", "lou hoover"],
@@ -212,7 +212,7 @@ window.KRILL_DATA.push(
   5: ["anna harrison", "letitia tyler", "julia tyler", "margaret taylor", "abigail fillmore", "jane pierce", "eliza johnson", "lucretia garfield", "caroline harrison"],
   6: ["rose cleveland", "angelica van buren", "emily donelson", "martha jefferson randolph|patsy jefferson", "mary arthur mcelroy", "priscilla tyler", "martha johnson patterson", "mary taylor bliss|betty taylor bliss"] } },
 
-{ id: "c-bible-book", pack: "History & People", prompt: "Name a book of the Bible", answers: {
+{ classic: true, id: "c-bible-book", pack: "History & People", prompt: "Name a book of the Bible", answers: {
   1: ["genesis", "exodus", "revelation|revelations|book of revelation|apocalypse", "psalms|psalm|book of psalms", "matthew|gospel of matthew"],
   2: ["john|gospel of john", "mark|gospel of mark", "luke|gospel of luke", "acts|acts of the apostles", "leviticus", "numbers", "deuteronomy", "job", "proverbs", "romans"],
   3: ["joshua", "judges", "ruth", "1 samuel|first samuel|i samuel|1st samuel|samuel", "2 samuel|second samuel|ii samuel|2nd samuel", "1 kings|first kings|i kings|1st kings|kings", "2 kings|second kings|ii kings|2nd kings", "esther", "ecclesiastes|qoheleth", "song of songs|song of solomon|canticles", "isaiah", "jeremiah", "ezekiel", "daniel", "jonah", "1 corinthians|first corinthians|i corinthians|1st corinthians|corinthians", "2 corinthians|second corinthians|ii corinthians|2nd corinthians", "galatians", "ephesians", "hebrews", "james"],
@@ -220,7 +220,7 @@ window.KRILL_DATA.push(
   5: ["obadiah", "nahum", "habakkuk", "zephaniah", "haggai", "zechariah", "philemon", "2 john|second john|ii john|2nd john", "3 john|third john|iii john|3rd john"],
   6: ["tobit|tobias", "judith", "wisdom|wisdom of solomon", "sirach|ecclesiasticus|ben sira", "baruch", "1 maccabees|first maccabees|i maccabees|maccabees", "2 maccabees|second maccabees|ii maccabees"] } },
 
-{ id: "c-declaration-signer", pack: "History & People", prompt: "Name a signer of the Declaration of Independence", answers: {
+{ classic: true, id: "c-declaration-signer", pack: "History & People", prompt: "Name a signer of the Declaration of Independence", answers: {
   1: ["john hancock|hancock", "thomas jefferson|jefferson", "benjamin franklin|franklin|ben franklin", "john adams"],
   2: ["samuel adams|sam adams", "benjamin rush|rush", "roger sherman|sherman", "richard henry lee", "robert morris"],
   3: ["button gwinnett|gwinnett", "charles carroll|charles carroll of carrollton|carroll", "john witherspoon|witherspoon", "elbridge gerry|gerry", "benjamin harrison|benjamin harrison v", "caesar rodney|rodney", "george wythe|wythe", "edward rutledge|rutledge", "james wilson", "francis hopkinson|hopkinson", "thomas mckean|mckean", "samuel chase|chase"],
@@ -228,14 +228,14 @@ window.KRILL_DATA.push(
   5: ["william whipple|whipple", "matthew thornton|thornton", "william ellery|ellery", "samuel huntington|huntington", "william floyd|floyd", "lewis morris", "george clymer|clymer", "george ross", "thomas stone", "william hooper|hooper", "joseph hewes|hewes", "george walton|walton"],
   6: ["william williams", "francis lewis", "john hart", "abraham clark", "john morton", "james smith", "george taylor", "john penn", "thomas heyward jr|thomas heyward|heyward", "thomas lynch jr|thomas lynch"] } },
 
-{ id: "c-roman-god", pack: "History & People", prompt: "Name a Roman god or goddess", answers: {
+{ classic: true, id: "c-roman-god", pack: "History & People", prompt: "Name a Roman god or goddess", answers: {
   1: ["jupiter|jove", "mars", "venus", "neptune", "mercury"],
   2: ["pluto", "juno", "minerva", "apollo", "cupid|amor", "saturn", "diana", "vulcan", "bacchus"],
   3: ["janus", "vesta", "ceres", "aurora", "sol|sol invictus", "luna", "fortuna", "faunus", "proserpina|proserpine", "liber", "dis pater|dis", "terra|tellus|terra mater", "victoria", "bellona", "flora", "pomona", "quirinus", "caelus|coelus", "somnus", "nox"],
   4: ["ops", "lares|lar", "penates", "terminus", "portunus", "consus", "fides", "spes", "pax", "concordia", "salus", "libertas", "pietas", "virtus", "honos|honor", "mors", "angerona", "carmenta", "egeria", "feronia", "bona dea", "fauna", "pales", "picus", "silvanus", "vertumnus", "volturnus", "orcus", "invidia", "discordia", "trivia", "juventas", "lucina", "abundantia", "laverna", "febris", "mithras", "nemesis", "aesculapius", "hercules"],
   5: ["nona", "decima", "morta", "robigus", "sancus|semo sancus", "summanus", "larunda", "mefitis", "mania", "cardea", "levana", "cunina", "rumina", "vagitanus|vaticanus", "sterquilinus|sterculius", "maia", "fornax", "furrina", "tiberinus", "pilumnus", "picumnus", "anna perenna", "mater matuta", "vica pota"],
   6: ["edusa", "potina", "cloacina", "volumna", "vacuna", "nenia", "orbona", "domiducus", "jugatinus", "lima", "forculus", "limentinus", "carna", "vediovis|vejovis", "fons|fontus", "inuus", "mutunus tutunus", "nortia", "verminus", "statanus", "fabulinus", "deverra", "intercidona"] } },
-{ id: "c-rhyme-cat", pack: "Words & Things", prompt: "Name a word that rhymes with \"cat\"", answers: {
+{ classic: true, id: "c-rhyme-cat", pack: "Words & Things", prompt: "Name a word that rhymes with \"cat\"", answers: {
   1: ["hat", "bat", "rat", "mat", "sat"],
   2: ["fat", "pat", "chat", "flat", "that", "splat"],
   3: ["brat", "spat", "slat", "vat", "gnat", "scat", "drat", "at", "acrobat", "diplomat", "doormat", "copycat", "wombat", "bobcat", "tomcat", "wildcat", "democrat", "thermostat"],
@@ -243,7 +243,7 @@ window.KRILL_DATA.push(
   5: ["plutocrat", "meritocrat", "rheostat", "hydrostat", "photostat", "gyrostat", "aerostat", "hemostat|haemostat", "cryostat", "ziggurat", "brickbat", "numbat", "thereat", "whereat", "plat", "lowfat"],
   6: ["kittycat", "pussycat", "requiescat", "heliostat", "humidistat", "pyrostat", "kat", "gat", "ratatat|rat a tat"] } },
 
-{ id: "c-color", pack: "Words & Things", prompt: "Name a color", answers: {
+{ classic: true, id: "c-color", pack: "Words & Things", prompt: "Name a color", answers: {
   1: ["red", "blue", "green", "yellow", "orange", "purple"],
   2: ["black", "white", "pink", "brown", "gray|grey", "violet"],
   3: ["indigo", "turquoise", "magenta", "cyan", "teal", "maroon", "navy|navy blue", "beige", "gold", "silver", "lavender", "crimson", "scarlet", "tan", "lime", "olive", "peach", "coral", "aqua", "burgundy", "cream", "ivory"],
@@ -251,7 +251,7 @@ window.KRILL_DATA.push(
   5: ["carmine", "cerise", "viridian", "ultramarine", "prussian blue", "orchid", "amaranth", "heliotrope", "verdigris", "gunmetal", "persimmon", "tyrian purple|tyrian", "cinnabar", "celadon", "byzantium", "wisteria", "harlequin", "liver", "glaucous", "feldgrau", "alizarin|alizarin crimson", "madder", "carnation", "oxblood", "ultraviolet", "thistle", "gainsboro", "cornflower|cornflower blue", "chestnut", "russet", "titian", "cadet blue", "midnight blue", "alice blue", "papaya whip", "moccasin", "burlywood", "lapis|lapis lazuli"],
   6: ["gamboge", "zaffre", "smalt", "wenge", "falu red|falu", "isabelline", "fulvous", "coquelicot", "aureolin", "bistre|bister", "caput mortuum", "cinereous", "sarcoline", "sinopia", "chamoisee", "eau de nil", "nankeen", "fallow", "drab", "xanadu", "skobeloff", "vantablack", "mummy brown", "dragons blood", "sang de boeuf", "lusty gallant", "minium", "orpiment", "realgar", "incarnadine"] } },
 
-{ id: "c-language", pack: "Words & Things", prompt: "Name a language", answers: {
+{ classic: true, id: "c-language", pack: "Words & Things", prompt: "Name a language", answers: {
   1: ["english", "spanish", "french", "chinese|mandarin|mandarin chinese", "german"],
   2: ["italian", "japanese", "russian", "arabic", "portuguese", "hindi", "korean"],
   3: ["dutch", "greek", "latin", "swedish", "polish", "turkish", "hebrew", "vietnamese", "thai", "cantonese", "urdu", "bengali|bangla", "swahili|kiswahili", "tagalog|filipino", "persian|farsi", "punjabi|panjabi", "irish|irish gaelic", "norwegian", "danish", "finnish", "indonesian|bahasa indonesia", "malay"],
@@ -259,7 +259,7 @@ window.KRILL_DATA.push(
   5: ["belarusian", "luxembourgish", "faroese", "breton", "cornish", "manx", "frisian", "romansh", "occitan", "sardinian", "corsican", "sicilian", "neapolitan", "ladino", "inuktitut", "greenlandic", "sami", "tatar", "chechen", "uyghur", "kyrgyz", "tajik", "turkmen", "dzongkha", "tigrinya", "oromo", "wolof", "fula|fulani|fulfulde", "lingala", "kinyarwanda", "shona", "sesotho|sotho", "tswana|setswana", "malagasy", "samoan", "tongan", "fijian", "tahitian", "chamorro", "tok pisin", "aymara", "nahuatl", "hmong", "javanese", "sundanese", "cebuano", "assamese", "odia|oriya", "sindhi", "coptic", "akkadian", "sumerian", "hittite", "etruscan", "old norse", "old english|anglo saxon", "pali", "klingon", "lakota", "ojibwe|ojibwa", "cree"],
   6: ["ainu", "burushaski", "nivkh", "ket", "yaghan", "piraha", "kusunda", "hadza", "sandawe", "livonian", "votic", "ubykh", "tlingit", "haida", "mohawk", "hopi", "zuni", "yupik", "aleut", "warlpiri", "pitjantjatjara", "arrernte", "tiwi", "chukchi", "evenki", "yakut|sakha", "buryat", "kalmyk", "abkhaz", "ossetian", "avar", "lezgian", "sorbian", "kashubian", "rusyn", "aromanian", "dalmatian", "manchu", "tangut", "khitan", "geez|ge ez", "tocharian", "sogdian", "elamite", "ugaritic", "phoenician", "oscan", "umbrian", "gaulish", "pictish", "toki pona", "volapuk", "interlingua", "lojban", "ido", "quenya", "sindarin", "dothraki", "bislama", "mapudungun", "bashkir"] } },
 
-{ id: "c-greek-letter", pack: "Words & Things", prompt: "Name a letter of the Greek alphabet", answers: {
+{ classic: true, id: "c-greek-letter", pack: "Words & Things", prompt: "Name a letter of the Greek alphabet", answers: {
   1: ["alpha", "beta", "omega", "delta", "pi"],
   2: ["gamma", "sigma", "theta", "lambda|lamda"],
   3: ["epsilon", "zeta", "mu|my", "rho", "phi", "psi", "tau", "kappa"],
@@ -267,7 +267,7 @@ window.KRILL_DATA.push(
   5: ["upsilon|ypsilon", "digamma|wau", "koppa|qoppa"],
   6: ["sampi", "san", "heta", "stigma", "sho"] } },
 
-{ id: "c-zodiac", pack: "Words & Things", prompt: "Name a zodiac sign (Western, Chinese or Vedic)", answers: {
+{ classic: true, id: "c-zodiac", pack: "Words & Things", prompt: "Name a zodiac sign (Western, Chinese or Vedic)", answers: {
   1: ["leo", "scorpio", "gemini", "aries", "virgo"],
   2: ["taurus", "cancer", "libra", "sagittarius", "capricorn", "aquarius", "pisces"],
   3: ["dragon", "rat|mouse", "tiger", "snake", "monkey", "dog", "horse", "rabbit|hare"],
@@ -275,7 +275,7 @@ window.KRILL_DATA.push(
   5: ["mesha", "simha", "kanya", "tula", "makara", "kumbha"],
   6: ["vrishabha|vrishabh", "mithuna", "karka|karkata", "vrishchika", "dhanu|dhanus", "meena|mina"] } },
 
-{ id: "c-card-game", pack: "Words & Things", prompt: "Name a card game", answers: {
+{ classic: true, id: "c-card-game", pack: "Words & Things", prompt: "Name a card game", answers: {
   1: ["poker", "blackjack|21|twenty one", "solitaire|patience", "go fish", "uno"],
   2: ["war", "rummy", "bridge|contract bridge", "hearts", "spades", "crazy eights|crazy 8s|crazy 8", "old maid", "gin rummy|gin"],
   3: ["euchre", "cribbage", "canasta", "baccarat", "texas holdem|holdem|texas hold em", "pinochle", "spit|speed", "slapjack", "egyptian ratscrew|egyptian rat screw", "president|scum", "cheat|i doubt it|bs", "snap", "spoons", "klondike", "freecell", "spider solitaire|spider", "pyramid", "whist", "magic the gathering|magic|mtg", "pokemon tcg|pokemon trading card game", "yu gi oh|yugioh", "skip bo", "phase 10"],
@@ -283,7 +283,7 @@ window.KRILL_DATA.push(
   5: ["tressette", "cuarenta", "tute", "jass", "klaverjassen", "sixty six", "schnapsen", "doppelkopf", "boston", "loo", "brag|three card brag", "speculation", "beggar my neighbour|beggar my neighbor", "happy families", "chase the ace", "mille bornes", "dutch blitz", "fluxx", "hanabi", "sushi go", "dominion", "gwent", "authors"],
   6: ["ombre", "quadrille", "basset", "primero", "gleek", "lansquenet", "pope joan", "bourre", "tonk|tunk", "thirty one|31|scat", "kalooki|kaluki", "conquian", "tichu", "big two|deuces|choi dai di", "daifugo", "tien len", "sueca", "ronda", "teen patti", "twenty nine|29", "court piece|rang", "zwicker", "knaves", "pishe pasha", "slobberhannes", "five crowns"] } },
 
-{ id: "c-dance", pack: "Words & Things", prompt: "Name a style of dance", answers: {
+{ classic: true, id: "c-dance", pack: "Words & Things", prompt: "Name a style of dance", answers: {
   1: ["salsa", "tango", "waltz", "ballet", "hip hop"],
   2: ["tap|tap dance", "swing", "cha cha|cha cha cha", "foxtrot", "macarena", "breakdance|breakdancing|breaking|b boying", "jazz", "disco", "twist", "conga", "square dance|square dancing"],
   3: ["rumba|rhumba", "samba", "flamenco", "polka", "bachata", "merengue", "jive", "quickstep", "lindy hop", "charleston", "line dance|line dancing", "belly dance|belly dancing", "irish dance|irish step dance|step dance", "hula", "limbo", "can can|cancan", "paso doble", "mambo", "contemporary", "modern dance|modern", "krump", "twerk|twerking", "electric slide", "chicken dance", "hokey pokey|hokey cokey", "mashed potato", "hustle", "bump", "tango argentino|argentine tango", "ballroom", "moonwalk", "floss", "dougie", "zumba"],
@@ -291,14 +291,14 @@ window.KRILL_DATA.push(
   5: ["allemande", "courante", "sarabande", "gigue", "pavane", "galliard", "branle", "volta", "schottische", "galop", "landler", "schuhplattler", "tinikling", "cueca", "marinera", "joropo", "danzon", "bomba", "plena", "kuduro", "azonto", "gwara gwara", "pantsula", "gumboot dance|gumboot", "odissi", "kuchipudi", "manipuri", "mohiniyattam", "kathakali", "garba", "dandiya", "lavani", "ghoomar", "butoh", "bon odori", "kecak", "legong", "saman", "dabke", "attan", "seguidilla", "bourree", "rigaudon", "passepied", "saltarello", "furlana|forlana", "pizzica"],
   6: ["siva samoa|siva", "ori tahiti|otea", "bugaku", "cakewalk", "black bottom", "turkey trot", "bunny hug", "grizzly bear", "big apple", "shim sham", "lambeth walk", "varsovienne", "kolomyjka", "krakowiak", "oberek", "kujawiak", "verbunkos", "kalamatianos", "hasapiko", "tsamiko", "zeibekiko", "pentozali", "lezginka", "trepak", "chamame", "zamba", "carimbo", "frevo", "maracatu", "jarabe tapatio|mexican hat dance", "huapango", "sega", "mapouka", "coupe decale"] } },
 
-{ id: "c-fabric", pack: "Words & Things", prompt: "Name a fabric or textile", answers: {
+{ classic: true, id: "c-fabric", pack: "Words & Things", prompt: "Name a fabric or textile", answers: {
   1: ["cotton", "silk", "wool", "denim", "polyester"],
   2: ["linen", "nylon", "velvet", "satin", "spandex|lycra|elastane", "fleece", "flannel", "lace"],
   3: ["cashmere", "rayon|viscose", "corduroy", "chiffon", "tweed", "felt", "jersey", "canvas", "muslin", "twill", "tulle", "acrylic", "chenille", "terry|terrycloth|terry cloth", "gingham", "burlap|hessian", "mohair", "angora", "alpaca", "gauze", "chambray", "seersucker", "taffeta", "organza", "crepe", "poplin", "microfiber|microfibre", "gabardine", "damask", "brocade", "khaki", "tartan"],
   4: ["jacquard", "voile", "batiste", "lawn", "calico", "chintz", "cheesecloth", "crinoline", "georgette", "charmeuse", "shantung", "dupioni|douppioni", "pongee", "oxford|oxford cloth", "broadcloth", "sateen", "percale", "madras", "cambric", "organdy|organdie", "velour", "velveteen", "moleskin", "ripstop", "cordura", "gore tex|goretex", "neoprene", "kevlar", "tencel|lyocell", "modal", "hemp", "jute", "ramie", "merino", "vicuna", "camel hair", "pashmina", "boucle", "tricot", "pique", "dimity", "toile", "baize", "serge", "worsted", "flannelette", "crepe de chine", "mesh", "loden", "melton", "duffel|duffle"],
   5: ["barathea", "bombazine", "buckram", "challis", "drill", "duck|duck canvas", "faille", "foulard", "fustian", "grosgrain", "habotai|habutai", "holland", "kersey", "lame", "marquisette", "matelasse", "nainsook", "ottoman", "peau de soie", "sharkskin", "tarlatan", "whipcord", "cretonne", "chino|chino cloth", "cheviot", "aida", "crash", "ninon", "mousseline", "gazar", "kente", "ikat", "batik", "chiffonette", "silnylon", "qiviut", "harris tweed", "irish linen", "tussah|tussar|tussore", "mikado", "zibeline", "sarsenet|sarcenet", "osnaburg", "nankeen"],
   6: ["samite", "sendal", "bombazet", "calamanco", "camlet", "dowlas", "drugget", "linsey woolsey", "moreen", "paduasoy", "shalloon", "tabby", "tammy", "wadmal", "baft", "doeskin", "byssus|sea silk", "pina", "abaca", "tapa|kapa|barkcloth|bark cloth", "khadi", "mashru", "himroo", "bandhani", "jamdani"] } },
-{ id: "c-clothing", pack: "Words & Things", prompt: "Name an item of clothing", answers: {
+{ classic: true, id: "c-clothing", pack: "Words & Things", prompt: "Name an item of clothing", answers: {
   1: ["shirt", "pants|trousers", "dress", "socks|sock", "hat", "jacket", "t shirt|tshirt|tee|tee shirt"],
   2: ["jeans", "skirt", "sweater|jumper|pullover", "coat", "shorts", "hoodie", "scarf", "gloves|glove", "underwear", "tie|necktie", "boots|boot", "shoes|shoe"],
   3: ["blouse", "vest|waistcoat", "suit", "tuxedo|tux", "sweatpants|trackpants|track pants|joggers", "leggings", "cardigan", "pajamas|pyjamas|pjs", "bra|brassiere", "boxers", "briefs", "sandals|sandal", "sneakers|trainers", "overalls|dungarees", "robe|bathrobe|dressing gown", "bikini", "swimsuit|bathing suit|swimming costume", "belt", "mittens|mitten", "beanie", "cap|baseball cap", "poncho", "raincoat", "blazer", "polo shirt|polo", "tank top|singlet", "parka", "kilt", "apron", "slippers", "gown", "jumpsuit", "romper", "onesie", "turtleneck|polo neck", "tights|pantyhose", "stockings", "flip flops|jandals"],
@@ -306,14 +306,14 @@ window.KRILL_DATA.push(
   5: ["doublet", "jerkin", "codpiece", "ruff", "farthingale", "bustle", "crinoline", "pantaloons", "spats", "puttees", "gaiters", "chaps", "tabard", "surcoat", "cassock", "surplice", "chasuble", "alb", "wimple", "snood", "fascinator", "cloche", "trilby", "pork pie hat|porkpie", "deerstalker", "panama hat|panama", "cowboy hat|stetson", "boater", "homburg", "tam o shanter|tam", "tricorne|tricorn", "bicorne|bicorn", "busby", "shako", "kepi", "ushanka", "keffiyeh|kufiya|kaffiyeh", "kippah|yarmulke", "zucchetto", "thobe|thawb|dishdasha", "djellaba|jellabiya", "kanga", "gho", "kira", "ao dai", "barong tagalog|barong", "guayabera", "mackintosh|mac", "ulster", "chesterfield", "smoking jacket", "nehru jacket", "mao suit", "zoot suit", "leisure suit", "catsuit", "teddy", "bustier", "peignoir", "chemise", "bloomers", "long johns", "union suit", "jockstrap", "dickey|dicky", "jabot", "sash", "sporran", "dolman", "banyan", "huipil"],
   6: ["chopines", "pattens", "poulaines", "houppelande", "cotehardie", "kirtle", "chiton", "himation", "peplos", "chlamys", "stola", "palla", "sagum", "paenula", "pelisse", "spencer", "redingote", "frock coat", "tailcoat|tails", "morning coat", "hose", "chausses", "braies", "gambeson", "hennin", "coif", "liripipe", "chaperon", "mantua", "stomacher", "pannier", "fichu", "tippet", "camail", "balmoral", "glengarry", "deel", "sampot", "malong", "tapis", "lavalava", "izaar", "kittel", "tallit", "chuba", "kosode", "jinbei", "happi", "fundoshi"] } },
 
-{ id: "c-currency", pack: "Words & Things", prompt: "Name a currency (past or present)", answers: {
+{ classic: true, id: "c-currency", pack: "Words & Things", prompt: "Name a currency (past or present)", answers: {
   1: ["dollar", "euro", "pound|pound sterling|sterling", "yen"],
   2: ["peso", "rupee", "franc", "yuan|renminbi|rmb", "ruble|rouble", "won"],
   3: ["real", "krona", "krone", "rand", "lira", "shekel|sheqel|new shekel", "dinar", "dirham", "baht", "rupiah", "ringgit", "deutsche mark|deutschmark|mark", "drachma", "peseta", "guilder|gulden", "escudo", "zloty", "bitcoin", "riyal|rial"],
   4: ["forint", "koruna", "lev", "leu", "hryvnia", "lari", "dram", "manat", "tenge", "som", "afghani", "taka", "kyat", "riel", "kip", "dong", "quetzal", "lempira", "cordoba", "colon", "balboa", "bolivar", "boliviano", "sol", "guarani", "naira", "cedi", "shilling", "birr", "kwacha", "kwanza", "pula", "metical", "denar", "kuna", "ducat", "florin", "denarius", "sestertius", "doubloon", "thaler|taler", "lek", "gourde", "pataca"],
   5: ["somoni", "tugrik|tugrug", "ngultrum", "rufiyaa", "kina", "vatu", "tala", "paanga|pa anga", "nakfa", "loti", "lilangeni", "ariary", "ouguiya", "dalasi", "leone", "dobra", "tolar", "litas", "lats", "kroon", "sucre", "inti", "austral", "cruzeiro", "cruzado", "reichsmark", "rentenmark", "solidus", "aureus", "obol", "piece of eight|pieces of eight", "livre", "ecu", "punt|irish pound", "markka", "schilling", "zaire"],
   6: ["ryo", "mon", "koban", "mohur", "bezant|byzant", "hyperpyron", "stater", "tetradrachm", "daric", "zecchino|sequin", "scudo", "milreis", "karbovanets", "ostmark", "reichsthaler", "kreuzer", "groschen", "tanka", "pagoda", "testoon|teston", "mancus", "sceat", "spesmilo", "assignat"] } },
-{ id: "c-religion", pack: "Words & Things", prompt: "Name a religion or religious movement", answers: {
+{ classic: true, id: "c-religion", pack: "Words & Things", prompt: "Name a religion or religious movement", answers: {
   1: ["christianity", "islam", "judaism", "buddhism", "hinduism"],
   2: ["sikhism", "catholicism|roman catholicism|catholic church", "mormonism|latter day saints|lds", "protestantism", "scientology", "taoism|daoism", "shinto|shintoism"],
   3: ["jainism", "zoroastrianism", "bahai|bahai faith", "wicca", "rastafari|rastafarianism", "confucianism", "paganism|neopaganism", "eastern orthodoxy|orthodox christianity|greek orthodox|russian orthodox", "jehovahs witnesses", "quakerism|quakers|religious society of friends", "voodoo|vodou|vodun|voudou", "santeria", "druidry|druidism", "satanism", "unitarian universalism|unitarianism"],
@@ -321,7 +321,7 @@ window.KRILL_DATA.push(
   5: ["karaite judaism|karaism", "hellenic polytheism|hellenism", "kemetism", "obeah", "cheondoism", "won buddhism", "raelism", "eckankar", "hoa hao", "seicho no ie", "oomoto", "shugendo", "bon", "mazdakism", "ayyavazhi", "lingayatism", "brahmo samaj|brahmoism", "arya samaj", "tengrism", "unification church|moonies", "native american church", "rodnovery|slavic native faith", "romuva", "catharism|cathars", "bogomilism", "waldensians", "hussites", "arianism", "nestorianism", "falun gong|falun dafa", "anabaptism", "swedenborgianism|new church", "christadelphians", "doukhobors", "hutterites", "ravidassia", "jediism"],
   6: ["mazdaznan", "yarsanism|ahl e haqq", "alevism", "ibadi islam|ibadism", "zaydism|zaydi", "ismailism|ismailis", "nizari", "alawites|alawism", "jansenism", "montanism", "marcionism", "sabianism", "theosophy", "anthroposophy", "spiritism", "subud", "mahikari", "konkokyo", "kurozumikyo", "daesoon jinrihoe", "jeung san do", "ryukyuan religion", "muism", "dievturiba", "zalmoxianism", "kardecism", "sant mat", "radha soami", "satnami"] } },
 
-{ id: "c-ology", pack: "Words & Things", prompt: "Name a word ending in \"-ology\"", answers: {
+{ classic: true, id: "c-ology", pack: "Words & Things", prompt: "Name a word ending in \"-ology\"", answers: {
   1: ["biology", "psychology", "geology", "zoology"],
   2: ["archaeology|archeology", "sociology", "astrology", "theology", "technology", "ecology", "anthropology"],
   3: ["meteorology", "criminology", "cardiology", "dermatology", "neurology", "oncology", "radiology", "pathology", "mythology", "ideology", "terminology", "methodology", "paleontology|palaeontology", "entomology", "ornithology", "cosmology", "etymology", "apology", "anthology", "chronology", "physiology", "pharmacology", "immunology", "toxicology", "virology", "microbiology", "gynecology|gynaecology", "urology", "ophthalmology", "scientology", "seismology", "egyptology", "numerology"],
@@ -329,14 +329,14 @@ window.KRILL_DATA.push(
   5: ["eschatology", "horology", "vexillology", "campanology", "oology", "speleology", "limnology", "petrology", "geomorphology", "sedimentology", "palynology", "dendrochronology", "cryptology", "metrology", "teleology", "deontology", "axiology", "semiology", "lexicology", "phraseology", "christology", "ecclesiology", "demonology", "angelology", "assyriology", "sinology", "indology", "kremlinology", "futurology", "victimology", "thanatology", "trichology", "osteology", "myology", "enzymology", "posology", "conchology", "selenology", "planetology", "exobiology", "cetology", "arachnology", "nematology", "laryngology", "proctology", "otology", "rhinology", "pedology", "zymology", "doxology", "hagiology"],
   6: ["myrmecology", "deltiology", "tegestology", "carpology", "pteridology", "bryology", "phycology", "lichenology", "tribology", "helminthology", "malacology", "oneirology", "nephology", "caliology", "soteriology", "pneumatology", "batology", "dipterology", "acarology", "lepidopterology", "coleopterology", "hymenopterology", "nidology", "pogonology", "tsiganology", "otorhinolaryngology", "hymnology", "papyrology", "sphagnology", "cecidology", "hamartiology", "agrostology", "bromatology", "chirology", "dactylology", "garbology"] } },
 
-{ id: "c-palindrome", pack: "Words & Things", prompt: "Name a palindrome (a single word spelled the same backwards)", answers: {
+{ classic: true, id: "c-palindrome", pack: "Words & Things", prompt: "Name a palindrome (a single word spelled the same backwards)", answers: {
   1: ["racecar", "level", "kayak", "mom", "dad", "wow"],
   2: ["noon", "radar", "civic", "madam", "refer", "rotor", "eye", "pop", "peep"],
   3: ["stats", "tenet", "sagas", "solos", "deed", "toot", "pup", "nun", "gag", "sis", "tot", "did", "bib", "ewe", "ere", "gig", "pip", "poop", "boob", "sees", "deified", "reviver", "repaper", "redder", "rotator", "minim", "kook", "tut", "mum", "nan", "dud", "naan", "bob"],
   4: ["malayalam", "redivider", "detartrated", "tattarrattat", "aibohphobia", "sexes", "shahs", "stets", "pap", "tat", "yay", "huh", "hah", "aha", "oho", "eke", "eve", "keek", "tit", "anna"],
   5: ["rotavator", "reifier", "alula", "abba", "terret"],
   6: ["kinnikinnik", "succus", "murdrum", "siris", "tirrit", "sememes", "zuz", "kaiak", "ama"] } },
-{ id: "c-knot", pack: "Words & Things", prompt: "Name a type of knot", answers: {
+{ classic: true, id: "c-knot", pack: "Words & Things", prompt: "Name a type of knot", answers: {
   1: ["square knot|reef knot|square|reef", "bowline", "slip knot|slipknot", "granny knot|granny"],
   2: ["figure eight knot|figure eight|figure of eight|figure 8|figure 8 knot", "clove hitch", "overhand knot|overhand", "sheet bend", "half hitch", "hangmans knot|noose|hangmans noose", "windsor knot|windsor|full windsor"],
   3: ["half windsor", "four in hand", "bow knot|bow|shoelace knot", "sheepshank", "taut line hitch|tautline hitch", "timber hitch", "two half hitches", "truckers hitch", "cleat hitch", "double fishermans knot|double fishermans|grapevine knot", "fishermans knot", "prusik knot|prusik", "monkeys fist", "constrictor knot", "surgeons knot", "alpine butterfly|butterfly knot|butterfly loop", "bowline on a bight"],
@@ -344,7 +344,7 @@ window.KRILL_DATA.push(
   5: ["scaffold knot", "magnus hitch", "icicle hitch", "pile hitch", "klemheist knot|klemheist", "bachmann hitch", "autoblock|french prusik", "garda hitch", "matthew walker knot", "wall knot", "crown knot", "manrope knot", "star knot", "lanyard knot", "chinese button knot|button knot", "frost knot", "millers knot|sack knot|bag knot", "poachers knot|strangle snare", "strangle knot", "transom knot", "ground line hitch", "blakes hitch", "distel hitch", "lightermans hitch", "ossel hitch", "midshipmans hitch", "farmers loop", "true lovers knot", "celtic knot", "bottle sling", "jug sling", "kelvin knot"],
   6: ["oysterman stopper|oysterman", "trefoil knot", "cinquefoil knot", "racking bend", "vice versa bend", "ashley bend", "eskimo bowline|cossack knot", "water bowline", "triple crown knot", "boa knot", "pedigree cow hitch", "double sheet bend", "gasket hitch", "becket hitch", "hackamore", "jury mast knot", "tumble hitch", "siberian hitch", "rat tail stopper", "zeppelin loop", "farrimond friction hitch", "valdotain tresse", "kreuzklem", "mooring hitch"] } },
 
-{ id: "c-hand-tool", pack: "Words & Things", prompt: "Name a hand tool", answers: {
+{ classic: true, id: "c-hand-tool", pack: "Words & Things", prompt: "Name a hand tool", answers: {
   1: ["hammer", "screwdriver", "wrench|spanner", "pliers", "saw"],
   2: ["drill|hand drill", "tape measure|measuring tape", "level|spirit level", "chisel", "file", "axe|ax", "shovel", "spade", "mallet"],
   3: ["crowbar|pry bar|wrecking bar", "hacksaw", "allen key|allen wrench|hex key", "socket wrench|ratchet", "utility knife|box cutter|stanley knife", "wire cutters|wire cutter|side cutters", "rake", "hoe", "trowel", "pickaxe|pick|pickax|pick axe", "sledgehammer|sledge hammer|sledge", "clamp|c clamp", "plane|hand plane", "awl", "square|try square|carpenters square|speed square", "pruners|secateurs|pruning shears", "shears", "tin snips|snips", "staple gun", "caulking gun|caulk gun", "putty knife|scraper", "needle nose pliers", "vise grips|locking pliers|mole grips", "pipe wrench", "adjustable wrench|crescent wrench", "hatchet", "machete", "scissors", "pitchfork", "handsaw|hand saw", "claw hammer", "ball peen hammer"],

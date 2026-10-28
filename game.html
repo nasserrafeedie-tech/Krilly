@@ -134,6 +134,8 @@ form.answer input::placeholder { color: var(--ink-dim); opacity: .7; }
 .tierbar { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
 .tierbar div { height: 8px; border-radius: 4px; background: var(--glass-line); }
 .tierbar div.on { background: var(--krill); }
+.fixed { font-size: 13px; color: var(--ink-dim); }
+.fixed s { opacity: .7; }
 .tiername { font-weight: 800; font-size: 15px; }
 .lists { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .lists h4 { margin: 0 0 6px; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-dim); font-weight: 600; }
@@ -224,15 +226,19 @@ function indexFor(p) {
   for (let t = 1; t <= 6; t++) for (const raw of p.answers[t] || []) {
     const aliases = raw.split("|").map(norm).filter(Boolean);
     if (!aliases.length) continue;
-    entries.push({ display: cap(raw.split("|")[0]), tier: t, keys: aliases.map(squash) });
+    entries.push({ display: cap(raw.split("|")[0]), tier: t, keys: aliases.map(squash), phrases: aliases });
   }
   indexCache.set(p.id, entries);
   return entries;
 }
+// Tries progressively looser matches. Loose matches autocorrect to the listed answer:
+// "gull" -> Seagull, "jordan" -> Michael Jordan, "bald eagle" -> Eagle, "seagul" -> Seagull.
+// When several answers fit a loose match, the most common one wins.
 function judge(p, input) {
-  const k = squash(norm(input));
-  if (k.length < 1) return null;
+  const n = norm(input), k = squash(n);
+  if (!k) return null;
   const entries = indexFor(p);
+  const commonest = list => list.sort((a, b) => a.tier - b.tier || a.display.length - b.display.length)[0] || null;
   for (const e of entries) if (e.keys.includes(k)) return e;
   const ks = singular(k);
   for (const e of entries) if (e.keys.some(x => x === ks || singular(x) === ks)) return e;
@@ -242,9 +248,30 @@ function judge(p, input) {
     for (const e of entries) for (const x of e.keys) {
       if (x.length < 5) continue;
       const d = lev(k, x, max);
-      if (d < bd) { bd = d; best = e; }
+      if (d < bd || (d === bd && best && e.tier < best.tier)) { bd = d; best = e; }
     }
     if (best) return best;
+  }
+  if (k.length < 3) return null;
+  // a whole word of a listed answer: "jordan", "picasso", "fiji water"
+  const words = n.split(" ");
+  const wordHit = entries.filter(e => e.phrases.some(ph => {
+    const pw = ph.split(" ");
+    return pw.length > 1 && words.length < pw.length && words.every(w => pw.includes(w)) && words.join("").length >= 4;
+  }));
+  if (wordHit.length) return commonest(wordHit);
+  // the tail or head of a compound: "gull" -> seagull, "fish" excluded below by the length ratio
+  if (ks.length >= 4) {
+    const part = entries.filter(e => e.keys.some(x => x.length > ks.length && (x.endsWith(ks) || x.startsWith(ks)) && ks.length / x.length >= 0.5));
+    if (part.length) return commonest(part);
+  }
+  // the answer is inside what was typed: "bald eagle" -> eagle, "a red cardinal bird" -> cardinal
+  const inside = entries.filter(e => e.phrases.some(ph => ph.length >= 4 && (" " + n + " ").includes(" " + ph + " ")));
+  if (inside.length) return inside.sort((a, b) => Math.max(...b.phrases.map(x => x.length)) - Math.max(...a.phrases.map(x => x.length)))[0];
+  // a typo inside one word of a longer answer: "jordon" -> Michael Jordan
+  if (k.length >= 5) {
+    const near = entries.filter(e => e.phrases.some(ph => ph.split(" ").some(w => w.length >= 5 && lev(k, w, 1) <= 1)));
+    if (near.length) return commonest(near);
   }
   return null;
 }
@@ -295,7 +322,12 @@ function floater(el, text, neg) {
   f.style.left = (r.right - 60) + "px"; f.style.top = (r.top - 6) + "px";
   document.body.appendChild(f); setTimeout(() => f.remove(), 1000);
 }
-const packs = () => [...new Set(DATA.map(p => p.pack))].sort();
+const packOf = p => p.classic ? "Classics" : p.pack;
+const packs = () => [...new Set(DATA.map(packOf))].sort((a, b) => (a === "Classics") - (b === "Classics") || a.localeCompare(b));
+// New Dive and Endless draw from Krillion-style prompts; the basic starter set lives in the Classics pack.
+const MAIN = DATA.filter(p => !p.classic);
+const POOL = MAIN.length >= PROMPTS_PER_DIVE ? MAIN : DATA;
+const DIVES = [...new Set(DATA.filter(p => p.dive).map(p => p.dive))].sort((a, b) => b - a);
 
 // ---------- timer ----------
 let timer = null;
@@ -328,6 +360,7 @@ function home() {
     <button class="mode primary" id="m-dive"><span class="t">New Dive</span><span class="d">7 random prompts, ${ROUND_SECONDS}s each. Play as many as you like.</span><span class="go">→</span></button>
     <button class="mode" id="m-endless"><span class="t">Endless Dive</span><span class="d">One air tank. Correct answers refill it, rarer ones refill more.</span><span class="go">∞</span></button>
     <button class="mode" id="m-packs"><span class="t">Themed Packs</span><span class="d">${packs().length} packs, ${DATA.length} prompts. Dive into one topic.</span><span class="go">≡</span></button>
+    ${DIVES.length ? `<button class="mode" id="m-past"><span class="t">Past Dives</span><span class="d">Replay ${DIVES.length} real Krillion daily dives, prompt for prompt.</span><span class="go">#</span></button>` : ""}
   </div>
   <div class="stats">
     <div class="stat"><div class="v">${st.dives}</div><div class="k">Dives</div></div>
@@ -339,27 +372,45 @@ function home() {
     <p>Type one valid answer per prompt. A wrong guess costs ${WRONG_PENALTY} seconds but you can keep guessing. Your first correct answer locks in. Rarer answers score more, and every point is 10 metres of depth, so a perfect dive reaches 7,000 m.</p>
     <div class="tiers">${TIERS.slice(1).map((t, i) => `<span>${"●".repeat(i + 1)}</span><span>${t.name}</span><span class="p">${t.pts}</span>`).join("")}</div>
   </details>`);
-  document.getElementById("m-dive").onclick = () => startDive(DATA, "Open Ocean");
+  document.getElementById("m-dive").onclick = () => startDive(POOL, "Open Ocean");
   document.getElementById("m-endless").onclick = () => startEndless();
   document.getElementById("m-packs").onclick = packsView;
+  if (DIVES.length) document.getElementById("m-past").onclick = pastView;
 }
 
 function packsView() {
   stopTimer();
   h(`<h2 class="sec">Themed Packs</h2>
   <div class="packs">${packs().map(name => {
-    const n = DATA.filter(p => p.pack === name).length;
+    const n = DATA.filter(p => packOf(p) === name).length;
     return `<button class="pack" data-pack="${esc(name)}"><div class="n">${esc(name)}</div><div class="c">${n} prompts</div></button>`;
   }).join("")}</div>
   <div class="row"><button class="btn ghost" id="back">Back</button></div>`);
-  $app.querySelectorAll(".pack").forEach(b => b.onclick = () => startDive(DATA.filter(p => p.pack === b.dataset.pack), b.dataset.pack));
+  $app.querySelectorAll(".pack").forEach(b => b.onclick = () => startDive(DATA.filter(p => packOf(p) === b.dataset.pack), b.dataset.pack));
+  document.getElementById("back").onclick = home;
+}
+
+function pastView() {
+  stopTimer();
+  const best = store.get("pastBest", {});
+  h(`<h2 class="sec">Past Dives</h2>
+  <div class="packs">${DIVES.map(n => {
+    const ps = DATA.filter(p => p.dive === n), date = ps[0].date ? new Date(ps[0].date + "T12:00:00Z").toLocaleDateString(undefined, { month: "short", day: "numeric" }) : "";
+    return `<button class="pack" data-dive="${n}"><div class="n">Dive #${n}</div><div class="c">${date}${date ? " · " : ""}${ps.length} prompts${best[n] != null ? ` · best ${(best[n] * 10).toLocaleString()} m` : ""}</div></button>`;
+  }).join("")}</div>
+  <div class="row"><button class="btn ghost" id="back">Back</button></div>`);
+  $app.querySelectorAll("[data-dive]").forEach(b => b.onclick = () => {
+    const n = +b.dataset.dive;
+    startDive(DATA.filter(p => p.dive === n).sort((a, b) => (a.slot || 0) - (b.slot || 0)), `Dive #${n}`, n);
+  });
   document.getElementById("back").onclick = home;
 }
 
 // ---------- classic dive ----------
 let game = null;
-function startDive(pool, label) {
-  game = { mode: "dive", label, pool, prompts: pickPrompts(pool, Math.min(PROMPTS_PER_DIVE, pool.length)), i: 0, results: [], score: 0 };
+function startDive(pool, label, dive) {
+  const prompts = dive ? pool : pickPrompts(pool, Math.min(PROMPTS_PER_DIVE, pool.length));
+  game = { mode: "dive", label, pool, dive, prompts, i: 0, results: [], score: 0 };
   playPrompt();
 }
 function gaugeDive() {
@@ -372,7 +423,7 @@ function playPrompt() {
   h(`
   <div class="hud"><div class="dots">${game.prompts.map((_, k) => `<div class="dot ${k < game.i ? "done" : k === game.i ? "cur" : ""}"></div>`).join("")}</div></div>
   <div class="card" id="card">
-    <div class="eyebrow">${esc(game.label)} · ${game.i + 1} of ${game.prompts.length} · ${esc(p.pack)}</div>
+    <div class="eyebrow">${esc(game.label)} · ${game.i + 1} of ${game.prompts.length} · ${esc(packOf(p))}</div>
     <h2 class="prompt">${esc(p.prompt)}</h2>
     <div><div class="air" id="air"><i></i></div><div class="airlabel"><span>Air</span><span id="secs">${ROUND_SECONDS}s</span></div></div>
     <form class="answer" id="form" autocomplete="off">
@@ -423,7 +474,8 @@ function finishPrompt(p, hit, misses, typed) {
       ${hit ? `
         <div class="verdict"><span class="ans">${esc(hit.display)}</span><span class="pts">+${pts}</span></div>
         <div class="tierbar">${[1,2,3,4,5,6].map(k => `<div class="${k <= hit.tier ? "on" : ""}"></div>`).join("")}</div>
-        <div><div class="tiername">${TIERS[hit.tier].name}</div><div class="feedback">${TIERS[hit.tier].note}${typed && squash(norm(typed)) !== squash(norm(hit.display)) ? ` · counted “${esc(typed)}” as ${esc(hit.display)}` : ""}</div></div>`
+        <div><div class="tiername">${TIERS[hit.tier].name}</div><div class="feedback">${TIERS[hit.tier].note}</div></div>
+        ${typed && squash(norm(typed)) !== squash(norm(hit.display)) ? `<div class="fixed"><s>${esc(typed)}</s> → ${esc(hit.display)}</div>` : ""}`
       : `<div class="verdict"><span class="ans">Out of air</span><span class="pts">+0</span></div>
          <div class="feedback">No valid answer in time.</div>`}
       ${tierLists(p, hit)}
@@ -443,7 +495,8 @@ function endDive() {
   st.finds += game.results.filter(r => r.tier >= 5).length; store.set("stats", st);
   const m = game.score * 10;
   const txt = shareText(game.results, game.score);
-  const pool = game.pool, label = game.label;
+  const pool = game.pool, label = game.label, dive = game.dive;
+  if (dive) { const pb = store.get("pastBest", {}); pb[dive] = Math.max(pb[dive] || 0, game.score); store.set("pastBest", pb); }
   h(`<div class="card">
     <div class="eyebrow">${esc(label)} · You surfaced from</div>
     <div class="endnum">${m.toLocaleString()}<small> m</small></div>
@@ -453,7 +506,7 @@ function endDive() {
     <div class="row"><button class="btn" id="again">Dive again</button><button class="btn ghost" id="copy">Copy result</button></div>
     <div class="row"><button class="btn ghost small" id="home">Home</button></div>
   </div>`);
-  document.getElementById("again").onclick = () => startDive(pool, label);
+  document.getElementById("again").onclick = () => dive ? pastView() : startDive(pool, label);
   document.getElementById("home").onclick = home;
   document.getElementById("copy").onclick = () => copy(txt);
   document.getElementById("again").focus();
@@ -470,7 +523,7 @@ function selectShare() {
 
 // ---------- endless ----------
 function startEndless() {
-  game = { mode: "endless", queue: pickPrompts(DATA, DATA.length), score: 0, count: 0, results: [] };
+  game = { mode: "endless", queue: pickPrompts(POOL, POOL.length), score: 0, count: 0, results: [] };
   const $air0 = () => document.getElementById("air");
   game.timer = startTimer(ENDLESS_START, left => {
     const a = $air0(); if (!a) return;
@@ -481,7 +534,7 @@ function startEndless() {
   nextEndless();
 }
 function nextEndless() {
-  if (!game.queue.length) game.queue = pickPrompts(DATA, DATA.length);
+  if (!game.queue.length) game.queue = pickPrompts(POOL, POOL.length);
   const p = game.queue.shift(); markSeen(p); game.cur = p;
   $gauge.innerHTML = `<b>${(game.score * 10).toLocaleString()} m</b><br>${game.count} found`;
   setDepth(game.score * 10 / 3);
@@ -511,7 +564,7 @@ function nextEndless() {
       const pts = TIERS[hit.tier].pts, bonus = ENDLESS_BONUS[hit.tier];
       game.score += pts; game.count++; game.timer.left += bonus;
       game.results.push({ prompt: p.prompt, answer: hit.display, tier: hit.tier, pts });
-      toast(`${hit.display} · ${TIERS[hit.tier].name} +${pts}`);
+      toast(`${squash(norm(v)) !== squash(norm(hit.display)) ? v + " → " : ""}${hit.display} · ${TIERS[hit.tier].name} +${pts}`);
       floater($air, `+${bonus}s`);
       nextEndless();
     } else {
