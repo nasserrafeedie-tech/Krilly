@@ -23,5 +23,5 @@ Every point is 10 m of depth, so a perfect dive reaches 7,000 m. Rarity tiers ar
 
 ## Editing
 - `game.html` — the game (page body; styles and engine).
-- `data/*.js` — the prompt bank. Each prompt lists answers by tier 1–6; `|` separates accepted spellings, the first is shown.
+- `data/dives.js` — 678 prompts from real Krillion daily dives #1–#104 (some reworded from summaries) plus 44 more in the same style, about 127,000 answers. `data/classic-*.js` — an easier starter set, played as the Classics pack. Each prompt lists answers by tier 1–6; `|` separates accepted spellings, the first is shown.
 - `node build.mjs` — inlines the data and writes `index.html`.
